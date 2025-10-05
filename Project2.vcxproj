@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app\game.cpp" />
+    <ClCompile Include="app\Player.cpp" />
     <ClCompile Include="app\Projectile.cpp" />
     <ClCompile Include="app\ProjectileManager.cpp" />
     <ClCompile Include="test\OutObject.cpp" />
@@ -187,6 +188,7 @@
     <ClCompile Include="engine\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="app\Player.h" />
     <ClInclude Include="app\Projectile.h" />
     <ClInclude Include="app\ProjectileManager.h" />
     <ClInclude Include="test\OutObject.h" />
