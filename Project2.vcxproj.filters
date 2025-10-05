@@ -250,5 +250,7 @@
     <Text Include="assets\sprites\frazzle-spr.txt" />
     <Text Include="assets\sprites\projectile1.txt" />
     <Text Include="assets\sprites\projectile2.txt" />
+    <Text Include="assets\sprites\portal.txt" />
+    <Text Include="assets\sprites\floor.txt" />
   </ItemGroup>
 </Project>

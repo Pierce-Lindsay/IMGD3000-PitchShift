@@ -12,8 +12,8 @@ void initResources()
 {
 	RM.loadSprite("projectile1.txt", "projectile1");
 	RM.loadSprite("projectile2.txt", "projectile2");
-	RM.loadSprite("chunk-spr.txt", "player");
-	RM.loadSprite("frazzle-spr.txt", "portal");
+	RM.loadSprite("floor.txt", "player");
+	RM.loadSprite("portal.txt", "portal");
 }
 
 /// <summary>

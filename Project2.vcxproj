@@ -230,12 +230,14 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\sprites\chunk-spr.txt" />
+    <Text Include="assets\sprites\floor.txt" />
     <Text Include="assets\sprites\frazzle-spr.txt" />
     <Text Include="assets\sprites\good-test1.txt" />
     <Text Include="assets\sprites\invalid-frame-count1.txt" />
     <Text Include="assets\sprites\invalid-frame-count2.txt" />
     <Text Include="assets\sprites\invalid-heights.txt" />
     <Text Include="assets\sprites\invalid-widths.txt" />
+    <Text Include="assets\sprites\portal.txt" />
     <Text Include="assets\sprites\projectile1.txt" />
     <Text Include="assets\sprites\projectile2.txt" />
   </ItemGroup>
