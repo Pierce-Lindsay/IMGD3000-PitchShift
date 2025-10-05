@@ -24,5 +24,5 @@ private:
 	int draw() override; //not drawable
 	int eventHandler(const df::Event* p_event) override;
 	~ProjectileManager();
-	bool spawing = false;
+	bool spawning = false;
 };

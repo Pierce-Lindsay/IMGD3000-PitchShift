@@ -19,8 +19,8 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 	if (p_event->getType() == df::STEP_EVENT) {
 		const df::EventStep* p_step = dynamic_cast<const df::EventStep*>(p_event);
 		if (p_step->getStepCount() == 30) //start spawing after 30 steps
-			spawing = true;
-		if(p_step->getStepCount() % 15 == 0 && spawing) //every 15 steps
+			spawning = true;
+		if(p_step->getStepCount() % 15 == 0 && spawning) //every 15 steps
 			createProjectile();
 		return 1;
 	}
@@ -54,10 +54,10 @@ void ProjectileManager::createProjectile() {
 
 bool ProjectileManager::getSpawing() const 
 {
-	return spawing;
+	return spawning;
 }
 
 void ProjectileManager::setSpawing(bool b) 
 {
-	spawing = b;
+	spawning = b;
 }
