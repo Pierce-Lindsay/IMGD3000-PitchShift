@@ -125,7 +125,7 @@ void GameManager::run()
 		if (steps.getStepCount() % 60 == 0)
 		{
 			//LM.writeLog("GameManager::run:Fps: %f!", 1.0f / (frameClock.split() / 1000000.0f));
-			//std::cout << "GameManager::run:Fps: " << 1.0f / (frameClock.split() / 1000000.0f) << '\n';
+			std::cout << "GameManager::run:Fps: " << 1.0f / (frameClock.split() / 1000000.0f) << '\n';
 		}
 			
 

@@ -154,6 +154,7 @@
     <ClCompile Include="app\game.cpp" />
     <ClCompile Include="app\Projectile.cpp" />
     <ClCompile Include="app\ProjectileManager.cpp" />
+    <ClCompile Include="app\SafeZone.cpp" />
     <ClCompile Include="test\OutObject.cpp" />
     <ClCompile Include="test\SpriteObject.cpp" />
     <ClCompile Include="test\Test.cpp" />
@@ -189,6 +190,7 @@
   <ItemGroup>
     <ClInclude Include="app\Projectile.h" />
     <ClInclude Include="app\ProjectileManager.h" />
+    <ClInclude Include="app\SafeZone.h" />
     <ClInclude Include="test\OutObject.h" />
     <ClInclude Include="test\SpriteObject.h" />
     <ClInclude Include="test\Test.h" />

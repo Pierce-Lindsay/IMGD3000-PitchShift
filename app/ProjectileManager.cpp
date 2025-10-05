@@ -4,6 +4,7 @@
 #include "../engine/LogManager.h"
 #include "../engine/game/EventStep.h"
 
+
 ProjectileManager::ProjectileManager() {
 	setType("ProjectileManager");
 	setSolidness(df::Solidness::SPECTRAL);
