@@ -120,6 +120,12 @@
     <ClCompile Include="app\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="app\EventTeleport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\Portal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\Manager.h">
@@ -225,6 +231,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="app\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\EventTeleport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\Portal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

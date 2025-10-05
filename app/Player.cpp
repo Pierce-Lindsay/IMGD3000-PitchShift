@@ -5,15 +5,13 @@
 #include "../engine/graphics/DisplayManager.h"
 #include "../engine/game/GameManager.h"
 
-#include "../engine/game/EventCollision.h"
-#include "../engine/input/EventKeyboard.h"
 #include "../engine/game/EventOut.h"
 #include "../engine/game/EventStep.h"
 
 Player::Player() {
 	setType("Player");
 	setSolidness(df::Solidness::HARD);
-	setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 10)));
+	setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 5)));
 	setSprite("player");
 	if(getSprite() == NULL) {
 		LM.writeLog("Player::Player: Warning! Sprite not found: player");
@@ -38,27 +36,14 @@ int Player::eventHandler(const df::Event* p_e) {
 	if (p_e->getType() == df::OUT_EVENT) {
 		const df::EventOut* p_out_event = dynamic_cast<const df::EventOut*>(p_e);
 		LM.writeLog("Player::eventHandler: Player out of bounds, resetting position");
-		setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 3)));
+		setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 5)));
 		return 1;
 	}
 
 	if (p_e->getType() == df::COLLISION_EVENT) {
 		const df::EventCollision* p_collision_event = dynamic_cast<const df::EventCollision*>(p_e);
-		if (p_collision_event->getObject1()->getType() == "Projectile" ||
-			p_collision_event->getObject2()->getType() == "Projectile") {
-			LM.writeLog("Player::eventHandler: Player hit by projectile");
-			if (!isHit) {
-				LM.writeLog("Player::eventHandler: Player health decreased");
-				health -= 1;
-				isHit = true;
-				invincibility_timer = invincibility_duration;
-				if (health <= 0) {
-					LM.writeLog("Player::eventHandler: Player health depleted, game over");
-					WM.markForDelete(this);
-				}
-			}
-			return 1;
-		}
+		hit(p_collision_event);
+		return 1;
 	}
 
 	if (p_e->getType() == df::KEYBOARD_EVENT) {
@@ -69,6 +54,12 @@ int Player::eventHandler(const df::Event* p_e) {
 
 	if (p_e->getType() == df::STEP_EVENT) {
 		step();
+		return 1;
+	}
+
+	if (p_e->getType() == TELEPORT_EVENT) {
+		const EventTeleport* p_teleport_event = dynamic_cast<const EventTeleport*>(p_e);
+		teleport(p_teleport_event);
 		return 1;
 	}
 
@@ -112,6 +103,11 @@ void Player::handleInput(const df::EventKeyboard* p_keyboard_event) {
 			LM.writeLog("Player::handleInput: Player quit, game over");
 			WM.markForDelete(this);
 			break;
+		case df::Keyboard::Key::C:
+			if (p_keyboard_event->getKeyboardAction() == df::EventKeyboardAction::KEY_PRESSED) {
+				setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 5)));
+			}
+			break;
 		default:
 			break;
 	}
@@ -134,5 +130,33 @@ void Player::step() {
 			isHit = false;
 			invincibility_timer = 0;
 		}
+	}
+}
+
+void Player::hit(const df::EventCollision* p_collision_event) {
+	if (p_collision_event->getObject1()->getType() == "Projectile" ||
+		p_collision_event->getObject2()->getType() == "Projectile") {
+		LM.writeLog("Player::eventHandler: Player hit by projectile");
+		if (!isHit) {
+			LM.writeLog("Player::eventHandler: Player health decreased");
+			health -= 1;
+			isHit = true;
+			invincibility_timer = invincibility_duration;
+			if (health <= 0) {
+				LM.writeLog("Player::eventHandler: Player health depleted, game over");
+				WM.markForDelete(this);
+			}
+		}
+	}
+}
+
+void Player::teleport(const EventTeleport* p_teleport_event) {
+	if (p_teleport_event->isToHigherPitch()) {
+		LM.writeLog("Player::teleport: Teleporting to higher pitch");
+		setPosition(df::Vector(3.0f, getPosition().y));
+	}
+	else {
+		LM.writeLog("Player::teleport: Teleporting to lower pitch");
+		setPosition(df::Vector((float)(DM.getHorizontalChars() - 3), getPosition().y));
 	}
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "../engine/game/Object.h"
 #include "../engine/input/EventKeyboard.h"
+#include "../engine/game/EventCollision.h"
+#include "EventTeleport.h"
 
 class Player : public df::Object {
 	private:
@@ -22,7 +24,10 @@ class Player : public df::Object {
 		void step();
 
 		// Handle player being hit
-		void hit();
+		void hit(const df::EventCollision* p_collision_event);
+
+		// Handle teleportation event
+		void teleport(const EventTeleport* p_teleport_event);
 	public:
 		Player();
 
