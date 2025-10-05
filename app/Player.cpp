@@ -13,7 +13,7 @@
 Player::Player() {
 	setType("Player");
 	setSolidness(df::Solidness::HARD);
-	setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 3)));
+	setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 10)));
 	setSprite("player");
 	if(getSprite() == NULL) {
 		LM.writeLog("Player::Player: Warning! Sprite not found: player");
@@ -24,6 +24,9 @@ Player::Player() {
 	score = 0;
 	speed = 1.0f;
 	dx = 0;
+	invincibility_timer = 0;
+	invincibility_duration = 60; // 60 frames of invincibility
+	isHit = false;
 	setSpeed(speed);
 }
 
@@ -40,17 +43,22 @@ int Player::eventHandler(const df::Event* p_e) {
 	}
 
 	if (p_e->getType() == df::COLLISION_EVENT) {
-		//const df::EventCollision* p_collision_event = dynamic_cast<const df::EventCollision*>(p_e);
-		//if (p_collision_event->getObject1()->getType() == "Projectile" || p_collision_event->getObject2()->getType() == "Projectile") {
-		//	LM.writeLog("Player::eventHandler: Player collision with projectile");
-		//	setHealth(health - 1);
-		//	if (health <= 0) {
-		//		LM.writeLog("Player::eventHandler: Player health zero, game over");
-		//		WM.markForDelete(this);
-		//	}
-		//	return 1;
-		//}
-		//return 0;
+		const df::EventCollision* p_collision_event = dynamic_cast<const df::EventCollision*>(p_e);
+		if (p_collision_event->getObject1()->getType() == "Projectile" ||
+			p_collision_event->getObject2()->getType() == "Projectile") {
+			LM.writeLog("Player::eventHandler: Player hit by projectile");
+			if (!isHit) {
+				LM.writeLog("Player::eventHandler: Player health decreased");
+				health -= 1;
+				isHit = true;
+				invincibility_timer = invincibility_duration;
+				if (health <= 0) {
+					LM.writeLog("Player::eventHandler: Player health depleted, game over");
+					WM.markForDelete(this);
+				}
+			}
+			return 1;
+		}
 	}
 
 	if (p_e->getType() == df::KEYBOARD_EVENT) {
@@ -119,4 +127,12 @@ void Player::move() {
 
 void Player::step() {
 	move();
+
+	if (isHit) {
+		invincibility_timer--;
+		if (invincibility_timer <= 0) {
+			isHit = false;
+			invincibility_timer = 0;
+		}
+	}
 }
