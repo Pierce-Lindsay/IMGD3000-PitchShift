@@ -28,11 +28,11 @@ void initObjects()
 	// Create 2 portals, one going to higher pitch, one to lower pitch
 	Portal* p1 = new Portal;
 	p1->setToHigherPitch(true);
-	p1->setPosition(df::Vector((float)(DM.getHorizontalChars() - 1), (float)(DM.getVerticalChars() - 5)));
+	p1->setPosition(df::Vector((float)(DM.getHorizontalChars() - 5), (float)(DM.getVerticalChars() - 5)));
 
 	Portal* p2 = new Portal;
 	p2->setToHigherPitch(false);
-	p2->setPosition(df::Vector(1.0f, (float)(DM.getVerticalChars() - 5)));
+	p2->setPosition(df::Vector(5.0f, (float)(DM.getVerticalChars() - 5)));
 }
 
 int main() {

@@ -108,6 +108,15 @@ void Player::handleInput(const df::EventKeyboard* p_keyboard_event) {
 				setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 5)));
 			}
 			break;
+		case df::Keyboard::Key::H:
+			if (p_keyboard_event->getKeyboardAction() == df::EventKeyboardAction::KEY_PRESSED) {
+				LM.writeLog("Player::handleInput: Player health increased");
+				health += 1;
+			}
+			break;
+		case df::Keyboard::Key::X:
+			setPosition(df::Vector((float)(DM.getHorizontalChars() - 3), getPosition().y));
+			break;
 		default:
 			break;
 	}
@@ -159,4 +168,5 @@ void Player::teleport(const EventTeleport* p_teleport_event) {
 		LM.writeLog("Player::teleport: Teleporting to lower pitch");
 		setPosition(df::Vector((float)(DM.getHorizontalChars() - 3), getPosition().y));
 	}
+	LM.writeLog("Player::teleport: Player position after teleport: (%f, %f)", getPosition().x, getPosition().y);
 }
