@@ -111,6 +111,12 @@
     <ClCompile Include="test\SpriteObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="app\Projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\ProjectileManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\Manager.h">
@@ -209,6 +215,12 @@
     <ClInclude Include="test\SpriteObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="app\Projectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\ProjectileManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\sprites\invalid-widths.txt" />
@@ -218,5 +230,7 @@
     <Text Include="assets\sprites\invalid-heights.txt" />
     <Text Include="assets\sprites\chunk-spr.txt" />
     <Text Include="assets\sprites\frazzle-spr.txt" />
+    <Text Include="assets\sprites\projectile1.txt" />
+    <Text Include="assets\sprites\projectile2.txt" />
   </ItemGroup>
 </Project>

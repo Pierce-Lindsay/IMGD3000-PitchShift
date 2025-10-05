@@ -152,6 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app\game.cpp" />
+    <ClCompile Include="app\Projectile.cpp" />
+    <ClCompile Include="app\ProjectileManager.cpp" />
     <ClCompile Include="test\OutObject.cpp" />
     <ClCompile Include="test\SpriteObject.cpp" />
     <ClCompile Include="test\Test.cpp" />
@@ -185,6 +187,8 @@
     <ClCompile Include="engine\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="app\Projectile.h" />
+    <ClInclude Include="app\ProjectileManager.h" />
     <ClInclude Include="test\OutObject.h" />
     <ClInclude Include="test\SpriteObject.h" />
     <ClInclude Include="test\Test.h" />
@@ -226,6 +230,8 @@
     <Text Include="assets\sprites\invalid-frame-count2.txt" />
     <Text Include="assets\sprites\invalid-heights.txt" />
     <Text Include="assets\sprites\invalid-widths.txt" />
+    <Text Include="assets\sprites\projectile1.txt" />
+    <Text Include="assets\sprites\projectile2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
