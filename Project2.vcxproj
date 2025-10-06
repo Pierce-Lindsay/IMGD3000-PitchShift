@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -151,9 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app\Floor.cpp" />
     <ClCompile Include="app\game.cpp" />
+    <ClCompile Include="app\Player.cpp" />
+    <ClCompile Include="app\Portal.cpp" />
     <ClCompile Include="app\Projectile.cpp" />
     <ClCompile Include="app\ProjectileManager.cpp" />
+    <ClCompile Include="app\EventTeleport.cpp" />
     <ClCompile Include="app\SafeZone.cpp" />
     <ClCompile Include="test\OutObject.cpp" />
     <ClCompile Include="test\SpriteObject.cpp" />
@@ -188,8 +192,12 @@
     <ClCompile Include="engine\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="app\Floor.h" />
+    <ClInclude Include="app\Player.h" />
+    <ClInclude Include="app\Portal.h" />
     <ClInclude Include="app\Projectile.h" />
     <ClInclude Include="app\ProjectileManager.h" />
+    <ClInclude Include="app\EventTeleport.h" />
     <ClInclude Include="app\SafeZone.h" />
     <ClInclude Include="test\OutObject.h" />
     <ClInclude Include="test\SpriteObject.h" />
@@ -226,12 +234,14 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\sprites\chunk-spr.txt" />
+    <Text Include="assets\sprites\floor.txt" />
     <Text Include="assets\sprites\frazzle-spr.txt" />
     <Text Include="assets\sprites\good-test1.txt" />
     <Text Include="assets\sprites\invalid-frame-count1.txt" />
     <Text Include="assets\sprites\invalid-frame-count2.txt" />
     <Text Include="assets\sprites\invalid-heights.txt" />
     <Text Include="assets\sprites\invalid-widths.txt" />
+    <Text Include="assets\sprites\portal.txt" />
     <Text Include="assets\sprites\projectile1.txt" />
     <Text Include="assets\sprites\projectile2.txt" />
   </ItemGroup>

@@ -33,6 +33,7 @@ int Projectile::eventHandler(const df::Event* p_event)
 	{
 		const df::EventCollision* p_collision_event = dynamic_cast<const df::EventCollision*>(p_event);
 		LM.writeLog("Projectile::eventHandler: Projectile %d collision", getID());
+		WM.markForDelete(this);
 		return 1;
 	}
 	return 0;

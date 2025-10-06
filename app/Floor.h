@@ -1,0 +1,17 @@
+#pragma once
+#include "../engine/game/Object.h"
+#include "../engine/graphics/Color.h"
+#include "EventTeleport.h"
+
+class Floor : public df::Object {
+	private:
+		// Change color based on teleport event
+		void changeColor(const EventTeleport* p_teleport_event);
+
+		// Check if two colors are the same
+		bool isSameColor(df::Color c1, df::Color c2);
+	public:
+		Floor();
+		~Floor();
+		int eventHandler(const df::Event* p_e) override;
+};
