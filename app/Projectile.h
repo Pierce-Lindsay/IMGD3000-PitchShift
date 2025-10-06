@@ -11,7 +11,7 @@ private:
 	df::Color color = df::WHITE;
 public:
 	const static int Y_SPAWN_POS = 0; //top of screen
-	Projectile(float Xpos, df::Color color, float speed, std::string sprite_label);
+	Projectile(df::Vector pos, df::Color color, float speed, std::string sprite_label);
 	int eventHandler(const df::Event* p_event) override;
 	int draw() override;
 };

@@ -5,6 +5,28 @@
 #include "Player.h"
 #include "Portal.h"
 #include "Floor.h"
+#include "SafeZone.h"
+#include <vector>
+
+SafeZone* safeZone = nullptr;
+std::vector<float> safePositions = 
+{ 20.0f, 40.0f, 10.0f, 30.0f, 10.0f, 20.0f, //3
+5.0f, 15.0f, 10.0f, 20.0f, 15.0f, 30.0f, //6
+5.0f, 20.0f, 8.0f, 28.0f, 4.0f, 20.0f, //9
+5.0f, 8.0f, 4.0f, 8.0f, 3.0f, 7.0f, //12
+3.0f, 20.0f, 3.0f,20.0f, 3.0f, 20.0f, //15
+8.0f, 16.0f, 24.0f, 32.0f, 40.0f, 30.0f, //18
+20.0f, 30.0f, 20.0f, 40.0f, 40.0f, 40.0f, //21
+10.0f, 10.0f, 10.0f, 10.0f, 30.0f, 17.0f, //24
+10.0f, 10.0f,10.0f, 10.0f, 10.0f, 10.0f, //27 ///////////////////////////
+15.0f, 50.0f, 50.0f, 50.0f, 50.0f, 50.0f, //30
+60.0f, 50.0f, 50.0f,50.0f, 35.0f, 40.0f, //33
+50.0f, 50.0f, 55.0f, 60.0f, 65.0f, 55.0f, //36
+70.0f, 70.0f, 70.0f,70.0f, 70.0f, 70.0f, //39//////////////////
+8.0f, 16.0f, 24.0f, 32.0f, 40.0f, 30.0f, //42
+20.0f, 30.0f, 20.0f, 40.0f, 40.0f, 40.0f, //45
+10.0f, 10.0f, 10.0f, 10.0f, 30.0f, 17.0f, //48
+}; //every half second for ... seconds
 
 /// <summary>
 /// Initialize resources for the game(sprites, sounds, music).
@@ -16,6 +38,7 @@ void initResources()
 	RM.loadSprite("floor.txt", "floor");
 	RM.loadSprite("portal.txt", "portal");
 	RM.loadSprite("chunk-spr.txt", "player");
+	RM.loadMusic("phantom.wav", "mainMusic");
 }
 
 /// <summary>
@@ -40,6 +63,8 @@ void initObjects()
 		Floor* p_floor = new Floor;
 		p_floor->setPosition(df::Vector((float)(i * 16 + 8), (float)(DM.getVerticalChars() - 2)));
 	}
+	safeZone = new SafeZone(safePositions, 0.5f, RM.getMusic("mainMusic"));
+	new ProjectileManager(safeZone);
 }
 
 int main() {
@@ -50,5 +75,6 @@ int main() {
 	initResources();
 	initObjects();
 	GM.run();
+	//delete safeZone;
     return 0;
 }

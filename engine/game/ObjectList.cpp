@@ -28,7 +28,7 @@ int ObjectList::insert(Object* p_o)
 	}
 }
 
-//slow if called a bunch 
+//slow if called a bunch //swap for speed, we don't care about order
 int ObjectList::remove(Object* p_o)
 {
 	int pos = find(p_o);
@@ -41,11 +41,9 @@ int ObjectList::remove(Object* p_o)
 	}
 	else
 	{
-		//shift everything above 1 over
-		for (int i = pos; i < count-1; i++) //last element is grabbed by i-1
-		{
-			p_obj[i] = p_obj[i + 1];
-		}
+		//swap pos with past and pop off end
+		p_obj[pos] = p_obj[count - 1];
+		p_obj[count - 1] = NULL;
 		count--;
 	}
 	return 0;

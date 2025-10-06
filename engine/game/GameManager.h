@@ -15,6 +15,7 @@ namespace df {
 		bool game_over = false;
 		int target_time = FRAME_LENGTH; //target frame time in miliseconds
 		int sleep_correction = 0; //correction in microseconds for accuracy
+		long long delta_time = 0.0f; //time the last frame took in miliseconds
 		Clock frameClock;
 		//singleton stuff
 		GameManager();
@@ -67,5 +68,10 @@ namespace df {
 		/// <summary>
 		/// Returns the target time for the game loop in miliseconds.
 		int getFrameTime() const;
+
+		/// <summary>
+		/// Returns the time the last frame took in miliseconds.
+		/// </summary>
+		long long getDeltaTime() const;
 	};
 }

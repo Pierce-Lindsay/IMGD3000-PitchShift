@@ -105,27 +105,26 @@ void GameManager::run()
 
 		//frame rate control
 		long long loop_time = frameClock.split();
-		auto actualTimeDiff = (target_time * 1000 - loop_time);
-		auto differance = actualTimeDiff - sleep_correction; //clock in micro-> frames in mili
-		if (differance > 0)
-		{
-			std::this_thread::sleep_for(std::chrono::microseconds(differance));
-			//after sleep figure out how off we were and adjust
-			long long new_loop_time = frameClock.split();
-			sleep_correction += (new_loop_time - target_time * 1000); //convert to miliseconds
-		}
+		//auto actualTimeDiff = (target_time * 1000 - loop_time);
+		//auto differance = actualTimeDiff - sleep_correction; //clock in micro-> frames in mili
 
-		if (actualTimeDiff < 0)
+		if (loop_time> target_time * 1000)
 		{
-			//LM.writeLog("GameManager::run:Running slower that target fps of: %f, actual fps was %f, actual time differance: %f!", convertToFPS(target_time), convertToFPS(loop_time/1000), actualTimeDiff/1000 );
-			//reset sleep correction
-			sleep_correction = 0;
+			LM.writeLog("GameManager::run:Running slower that target fps of: %f, actual fps was %f", convertToFPS(target_time * 1000), convertToFPS(loop_time));
 		}
+		else if (loop_time < target_time * 1000)
+		{
+			while(loop_time < (target_time * 1000)* 0.99)
+			{
+				loop_time = frameClock.split();
+			}
+		}
+		delta_time = loop_time / 1000; //in miliseconds
 
-		if (steps.getStepCount() % 60 == 0)
+		if (steps.getStepCount() % 20 == 0)
 		{
 			//LM.writeLog("GameManager::run:Fps: %f!", 1.0f / (frameClock.split() / 1000000.0f));
-			//std::cout << "GameManager::run:Fps: " << 1.0f / (frameClock.split() / 1000000.0f) << '\n';
+			std::cout << "GameManager::run:Fps: " << 1.0f / (delta_time/1000.0f) << '\n';
 		}
 			
 
@@ -159,7 +158,12 @@ int GameManager::getFrameTime() const
 double GameManager::convertToFPS(int frame_Length)
 {
 	double d = 1 / (double)(frame_Length);
-	d *= 1000;//in miliseconds need seconds
+	d *= 1000000;//in microseconds need seconds
 	return d;
+}
+
+long long GameManager::getDeltaTime() const
+{
+	return delta_time;
 }
 

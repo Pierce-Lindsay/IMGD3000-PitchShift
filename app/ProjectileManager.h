@@ -1,14 +1,20 @@
 #pragma once
 #include "projectile.h"
 #include "../engine/game/Object.h"
+#include "SafeZone.h"
 
 class ProjectileManager : public df::Object {
 public:
-	ProjectileManager();
+	ProjectileManager(SafeZone* safeZone);
 	/// <summary>
 	/// Creates a projectile in a position according to...
 	/// </summary>
-	void createProjectile();
+	void createProjectile(float xPos, float yPos);
+
+	/// <summary>
+	/// Spawn all neccesary projectiles outside the safe zone.
+	/// </summary>
+	void createProjectiles();
 
 	/// <summary>
 	/// Returns whether spawning is currently active.
@@ -25,4 +31,7 @@ private:
 	int eventHandler(const df::Event* p_event) override;
 	~ProjectileManager();
 	bool spawning = false;
+	const float SPAWN_INTERVAL = 500.0f; //miliseconds
+	float lastSpawnTime = 0;
+	SafeZone* safeZone = nullptr;
 };
