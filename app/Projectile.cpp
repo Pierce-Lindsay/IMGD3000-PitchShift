@@ -7,7 +7,7 @@
 Projectile::Projectile(df::Vector pos, df::Color color, float speed, std::string sprite_label)
 {
 	setType("Projectile");
-	setSolidness(df::Solidness::SPECTRAL);
+	setSolidness(df::Solidness::SOFT);
 	setPosition(pos);
 	setSpeed(speed);
 	setDirection(df::Vector(0, 1)); //down

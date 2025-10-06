@@ -46,10 +46,6 @@ void initResources()
 /// </summary>
 void initObjects()
 {
-	new ProjectileManager;
-
-	new Player;
-
 	// Create 2 portals, one going to higher pitch, one to lower pitch
 	Portal* p1 = new Portal;
 	p1->setToHigherPitch(true);
@@ -65,6 +61,8 @@ void initObjects()
 	}
 	safeZone = new SafeZone(safePositions, 0.5f, RM.getMusic("mainMusic"));
 	new ProjectileManager(safeZone);
+
+	new Player;
 }
 
 int main() {
