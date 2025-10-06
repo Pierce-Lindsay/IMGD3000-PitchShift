@@ -5,6 +5,7 @@
 #include "../engine/game/EventStep.h"
 #include "../engine/Utility.h"
 #include "../engine/graphics/Color.h"
+#include "../engine/game/GameManager.h"
 #include <array>
 
 std::array<std::string, 2> sprite_labels = {"projectile2" }; //potential sprites for projectiles
@@ -33,7 +34,8 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 			spawning = true;
 			safeZone->start();
 		}
-		if (p_step->getStepCount() % 15 == 0 && spawning) //every 15 steps
+		float curTime = 0;
+		if (safeZone->hasStarted() && (curTime = safeZone->getMusicTime()) - lastSpawnTime >= SPAWN_INTERVAL && spawning) //every 1/2 second
 		{
 			safeZone->update();
 			if (safeZone->isFinished()) 
@@ -43,7 +45,10 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 				return 1;
 			}
 			else
+			{
 				createProjectiles(); //only create if not finished
+				lastSpawnTime = curTime;
+			}
 		}
 		return 1;
 	}
@@ -52,7 +57,8 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 
 void ProjectileManager::createProjectile(float xPos, float yPos) {
 	//create a projectile at the given x position
-	float speed = 1 + (rand() % 10 + 1)/40.0f;
+	//float speed = 5 + (rand() % 10 + 1)/80.0f * GM.getDeltaTime();
+	float speed = 1;
 	//int sprite_roll = rand() % sprite_labels.size();
 	std::string sprite_label = sprite_labels[0];	
 	Projectile* p = new Projectile(df::Vector(xPos, yPos), df::RED, speed, sprite_label);
@@ -84,19 +90,19 @@ void ProjectileManager::createProjectiles() {
 	if (leftEnd < 0) leftEnd = 0;
 	if (rightStart > DM.getHorizontalChars()) rightStart = DM.getHorizontalChars();
 
-	int leftSpawnCount = leftEnd / 4; //every other position
-	int rightSpawnCount = (rightEnd - rightStart) / 4; //every other position
+	int leftSpawnCount = leftEnd / 5; //every other position
+	int rightSpawnCount = (rightEnd - rightStart) / 5; //every other position
 
 	//we want spikes to drop sooner when further away from safe zone
 	float yPos = 0;
 	for (int i = 0; i < leftSpawnCount; i++) {
-		float xPos = float(i * 4 + 1); //+1 to avoid spawning at 0
+		float xPos = float(i * 5 + 1); //+1 to avoid spawning at 0
 		createProjectile(xPos, yPos);
 		yPos -= 1; //further left, lower y pos (so it falls sooner)
 	}
 	yPos = -rightSpawnCount;
 	for (int i = 0; i < rightSpawnCount; i++) {
-		float xPos = float(rightStart + i * 4 + 1); //+1 to avoid spawning at 0
+		float xPos = float(rightStart + i * 5 + 1); //+1 to avoid spawning at 0
 		createProjectile(xPos, yPos);
 		yPos += 1;
 	}

@@ -39,6 +39,9 @@ namespace df {
 		unsigned int m_window_horizontal_chars = WINDOW_HORIZONTAL_CHARS_DEFAULT; //current window width chars
 		unsigned int m_window_vertical_chars = WINDOW_VERTICAL_CHARS_DEFAULT; //current window height chars
 
+		sf::Text* m_text = NULL; //text for drawing characters
+		sf::RectangleShape m_rectangle;
+
 
 	public:
 		/// <summary>
@@ -67,7 +70,7 @@ namespace df {
 		/// Draw a specified character at the screen location (world_pos Vector) with the specified color.
 		/// </summary>
 		/// <returns>0 if good, -1 else.</returns>
-		int drawCh(Vector world_pos, char ch, Color color = WHITE) const;
+		int drawCh(Vector world_pos, char ch, Color color = WHITE);
 
 		/// <summary>
 		/// Draw a specified string at the screen location (world_pos Vector) with the 
@@ -75,7 +78,7 @@ namespace df {
 		/// Justification with respect to position.
 		/// </summary>
 		///	<returns>0 if good, -1 else.</returns>
-		int drawString(Vector world_pos, std::string string, Justification just, Color color = WHITE) const;
+		int drawString(Vector world_pos, std::string string, Justification just, Color color = WHITE);
 
 		/// <summary>
 		/// Get the horizontal character width of the window.

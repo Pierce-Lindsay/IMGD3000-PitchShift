@@ -55,6 +55,26 @@ int DisplayManager::startUp()
 	m_p_window->setMouseCursorVisible(false);
 	m_p_window->setVerticalSyncEnabled(true); //vsync on for now
 
+	float char_width = charWidth();
+	float char_height = charHeight();
+
+	m_rectangle.setSize(sf::Vector2f(char_width, char_height - 1)); //not sure what -1 for
+	m_rectangle.setFillColor(WINDOW_BACKGROUND_COLOR_DEFAULT);
+	m_rectangle.setPosition(sf::Vector2f(0, 0)); //default for now);
+
+	m_text = new sf::Text(m_font);
+	m_text->setStyle(sf::Text::Bold); // bold looks better
+
+
+	//text we're drawing
+
+	int text_size = char_width * 2; //looks good i guess
+	if (char_width >= char_height)
+		text_size = char_height * 2;
+
+	m_text->setCharacterSize(text_size);
+	m_text->setFillColor(WINDOW_BACKGROUND_COLOR_DEFAULT);
+
 	LM.writeLog("DisplayManager::startUp::Started DisplayManager Successfully!");
 
 	return Manager::startUp();
@@ -64,6 +84,8 @@ void DisplayManager::shutDown()
 {
 	if (m_p_window != NULL)
 	{
+		delete m_text;
+		m_text = NULL;
 		m_p_window->close();
 		delete m_p_window;
 		m_p_window = NULL;
@@ -73,7 +95,7 @@ void DisplayManager::shutDown()
 }
 
 
-int DisplayManager::drawCh(Vector world_pos, char ch, Color color) const
+int DisplayManager::drawCh(Vector world_pos, char ch, Color color)
 {
 	if (m_p_window == NULL)
 	{
@@ -85,29 +107,21 @@ int DisplayManager::drawCh(Vector world_pos, char ch, Color color) const
 	float char_width = charWidth();
 	float char_height = charHeight();
 	//create rectangles behind characters for "see through" text
-	sf::RectangleShape rectangle;
-	rectangle.setSize(sf::Vector2f(char_width, char_height - 1)); //not sure what -1 for
-	rectangle.setFillColor(WINDOW_BACKGROUND_COLOR_DEFAULT);
-	rectangle.setPosition(sf::Vector2f(pixel_pos.x + char_width / 10,
+	m_rectangle.setPosition(sf::Vector2f(pixel_pos.x + char_width / 10,
 		pixel_pos.y + char_height / 5)); //for centering, looks good??
-	m_p_window->draw(rectangle);
+	m_p_window->draw(m_rectangle);
 
 	//text we're drawing
 
-	int text_size = char_width * 2; //looks good i guess
-	if (char_width >= char_height)
-		text_size = char_height * 2;
+	m_text->setString(ch);
+	m_text->setFillColor(color.getSFMLColor());
+	m_text->setPosition(sf::Vector2f(pixel_pos.x, pixel_pos.y));
 
-	sf::Text text(m_font, ch, text_size);
-	text.setFillColor(color.getSFMLColor());
-	text.setPosition(sf::Vector2f(pixel_pos.x, pixel_pos.y));
-	text.setStyle(sf::Text::Bold); // bold looks better
-
-	m_p_window->draw(text);
+	m_p_window->draw(*m_text);
 	return 0;
 }
 
-int DisplayManager::drawString(Vector world_pos, std::string string, Justification just, Color color) const
+int DisplayManager::drawString(Vector world_pos, std::string string, Justification just, Color color)
 {
 	if (m_p_window == NULL)
 	{

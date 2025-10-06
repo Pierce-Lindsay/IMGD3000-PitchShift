@@ -20,14 +20,22 @@ Color::Color(sf::Color sfml_color)
 	g = sfml_color.g;
 	b = sfml_color.b;
 	a = sfml_color.a;
+	sfml_color = sf::Color(r, g, b, a);
 }
 
 Color::Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a) : r(r), g(g), b(b), a(a)
-{}
-
-sf::Color Color::getSFMLColor() const
 {
-	return sf::Color(r, g, b, a);
+	sfml_color = sf::Color(r, g, b, a);
+}
+
+sf::Color Color::getSFMLColor()
+{
+	if(color_changed)
+	{
+		sfml_color = sf::Color(r, g, b, a);
+		color_changed = false;
+	}
+	return sfml_color;
 }
 uint8_t Color::getR() const
 {
@@ -48,18 +56,22 @@ uint8_t Color::getA() const
 void Color::setR(uint8_t r)
 {
 	this->r = r;
+	color_changed = true;
 }
 void Color::setG(uint8_t g)
 {
 	this->g = g;
+	color_changed = true;
 }
 void Color::setB(uint8_t b)
 {
 	this->b = b;
+	color_changed = true;
 }
 void Color::setA(uint8_t a)
 {
 	this->a = a;
+	color_changed = true;
 }
 
 df::Color Color::colorFromString(std::string str_color)

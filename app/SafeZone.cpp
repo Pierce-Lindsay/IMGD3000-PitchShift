@@ -72,3 +72,10 @@ float SafeZone::lerp(float a, float b, float t)
 {
 	return a + t * (b - a);
 }
+
+float SafeZone::getMusicTime() const
+{
+	if (music == NULL || finished || !started)
+		return 0;
+	return music->getMusic()->getPlayingOffset().asMilliseconds();
+}

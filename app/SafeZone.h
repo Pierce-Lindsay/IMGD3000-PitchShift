@@ -68,4 +68,10 @@ public:
 	/// Set the width of the safe zone.
 	/// </summary>
 	void setWidth(float width);
+
+	/// <summary>
+	/// Gets the current time in the music in milliseconds from the start, 0 if music hasn't started 
+	/// and 0 if music is finished.
+	/// </summary>
+	float getMusicTime() const;
 };

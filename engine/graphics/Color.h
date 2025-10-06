@@ -14,11 +14,14 @@ namespace df {
 		uint8_t b; //blue
 		uint8_t a; //alpha
 
+		sf::Color sfml_color; //equivalent sfml color
+		bool color_changed = false; //has the color changed since last sfml color update
+
 	public:
 		/// <summary>
 		/// Returs te sfml color equivalent to this dragonfly color.
 		/// </summary>
-		sf::Color getSFMLColor() const;
+		sf::Color getSFMLColor();
 
 		/// <summary>
 		/// Create a new color based on a SFML color.
