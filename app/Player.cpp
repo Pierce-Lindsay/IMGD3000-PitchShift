@@ -115,7 +115,7 @@ void Player::handleInput(const df::EventKeyboard* p_keyboard_event) {
 			}
 			break;
 		case df::Keyboard::Key::X:
-			setPosition(df::Vector((float)(DM.getHorizontalChars() - 3), getPosition().y));
+			setPosition(df::Vector((float)(DM.getHorizontalChars() - 7), getPosition().y));
 			break;
 		default:
 			break;
@@ -162,11 +162,11 @@ void Player::hit(const df::EventCollision* p_collision_event) {
 void Player::teleport(const EventTeleport* p_teleport_event) {
 	if (p_teleport_event->isToHigherPitch()) {
 		LM.writeLog("Player::teleport: Teleporting to higher pitch");
-		setPosition(df::Vector(3.0f, getPosition().y));
+		setPosition(df::Vector(7.0f, getPosition().y));
 	}
 	else {
 		LM.writeLog("Player::teleport: Teleporting to lower pitch");
-		setPosition(df::Vector((float)(DM.getHorizontalChars() - 3), getPosition().y));
+		setPosition(df::Vector((float)(DM.getHorizontalChars() - 7), getPosition().y));
 	}
 	LM.writeLog("Player::teleport: Player position after teleport: (%f, %f)", getPosition().x, getPosition().y);
 }

@@ -4,6 +4,7 @@
 #include "ProjectileManager.h"
 #include "Player.h"
 #include "Portal.h"
+#include "Floor.h"
 
 /// <summary>
 /// Initialize resources for the game(sprites, sounds, music).
@@ -12,8 +13,9 @@ void initResources()
 {
 	RM.loadSprite("projectile1.txt", "projectile1");
 	RM.loadSprite("projectile2.txt", "projectile2");
-	RM.loadSprite("floor.txt", "player");
+	RM.loadSprite("floor.txt", "floor");
 	RM.loadSprite("portal.txt", "portal");
+	RM.loadSprite("chunk-spr.txt", "player");
 }
 
 /// <summary>
@@ -28,11 +30,16 @@ void initObjects()
 	// Create 2 portals, one going to higher pitch, one to lower pitch
 	Portal* p1 = new Portal;
 	p1->setToHigherPitch(true);
-	p1->setPosition(df::Vector((float)(DM.getHorizontalChars() - 5), (float)(DM.getVerticalChars() - 5)));
+	p1->setPosition(df::Vector((float)(DM.getHorizontalChars() - 3), (float)(DM.getVerticalChars() - 5)));
 
 	Portal* p2 = new Portal;
 	p2->setToHigherPitch(false);
-	p2->setPosition(df::Vector(5.0f, (float)(DM.getVerticalChars() - 5)));
+	p2->setPosition(df::Vector(3.0f, (float)(DM.getVerticalChars() - 5)));
+
+	for (int i = 0; i < 5; i++) {
+		Floor* p_floor = new Floor;
+		p_floor->setPosition(df::Vector((float)(i * 16 + 8), (float)(DM.getVerticalChars() - 2)));
+	}
 }
 
 int main() {

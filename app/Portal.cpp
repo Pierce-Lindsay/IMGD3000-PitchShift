@@ -3,10 +3,13 @@
 #include "../engine/LogManager.h"
 #include "../engine/game/WorldManager.h"
 #include "EventTeleport.h"
+#include "../engine/game/EventStep.h"
 
 Portal::Portal() {
 	setType("Portal");
 	to_higher_pitch = true;
+	teleport_cooldown = 120; 
+	cooldown_timer = 0;
 	setAltitude(1);
 	setSolidness(df::Solidness::SOFT);
 	setSprite("portal");
@@ -32,8 +35,14 @@ void Portal::collide(const df::EventCollision* p_collision_event) {
 
 	if (p_collision_event->getObject1()->getType() == "Player" ||
 		p_collision_event->getObject2()->getType() == "Player") {
+		if (cooldown_timer > 0) {
+			LM.writeLog("Portal::collide: In cooldown, cannot teleport yet.");
+			return; // still in cooldown
+		}
+
 		LM.writeLog("Portal::collide: Player collided with portal, transitioning pitch.");
 		WM.onEvent(&teleport_event);
+		cooldown_timer = teleport_cooldown; // reset cooldown
 	}
 }
 
@@ -43,5 +52,15 @@ int Portal::eventHandler(const df::Event* p_e) {
 		collide(p_collision_event);
 		return 1;
 	}
+	if (p_e->getType() == df::STEP_EVENT) {
+		step();
+		return 1;
+	}
 	return 0;
+}
+
+void Portal::step() {
+	if (cooldown_timer > 0) {
+		cooldown_timer--;
+	}
 }

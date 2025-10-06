@@ -1,15 +1,25 @@
-5
-7
+10
+16
 1
 5
 red
 
-|#####|
+|#X############|
 
-|###X#|
+|##X#########X#|
 
-|#X##X|
+|####XXX#######|
 
-|X##XX|
+|X#######X##X#X|
 
-|XXXXX|
+|##XX##XX####X#|
+
+|#X####X###XXXX|
+
+|###XXXXXXXX###|
+
+|XX#X####XX#XXX|
+
+|X#XXX#XXXXX#XX|
+
+|XXXXXXXXXXXXXX|
