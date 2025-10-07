@@ -21,7 +21,7 @@ Player::Player() {
 	setAltitude(3);
 	health = 3;
 	score = 0;
-	speed = 1.0f;
+	speed = 1.6f;
 	dx = 0;
 	invincibility_timer = 0;
 	invincibility_duration = 60; // 60 frames of invincibility

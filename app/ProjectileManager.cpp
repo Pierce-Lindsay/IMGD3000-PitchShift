@@ -35,8 +35,12 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 			safeZone->start();
 		}
 		float curTime = 0;
-		if (safeZone->hasStarted() && (curTime = safeZone->getMusicTime()) - lastSpawnTime >= SPAWN_INTERVAL && spawning) //every 1/2 second
+
+		if((safeZone->hasStarted() && spawning) && 
+			(initial_offset && (curTime = safeZone->getMusicTime()) - lastSpawnTime >= INITIAL_OFFSET  || (curTime = safeZone->getMusicTime()) - lastSpawnTime >= SPAWN_INTERVAL))
 		{
+			if (initial_offset) initial_offset = false; //only apply initial offset once
+
 			safeZone->update();
 			if (safeZone->isFinished()) 
 			{
@@ -58,7 +62,7 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 void ProjectileManager::createProjectile(float xPos, float yPos) {
 	//create a projectile at the given x position
 	//float speed = 5 + (rand() % 10 + 1)/80.0f * GM.getDeltaTime();
-	float speed = 1;
+	float speed = 0.55;
 	//int sprite_roll = rand() % sprite_labels.size();
 	std::string sprite_label = sprite_labels[0];	
 	Projectile* p = new Projectile(df::Vector(xPos, yPos), df::RED, speed, sprite_label);
@@ -79,31 +83,36 @@ void ProjectileManager::createProjectiles() {
 	}
 
 	float safeZoneCenter = float(safeZone->getSafeZone());
+	float leftStart = 5;
+	float rightEnd = float(DM.getHorizontalChars() - 3);
+
+	if(safeZoneCenter < leftStart || safeZoneCenter > rightEnd) {
+		LM.writeLog("ProjectileManager::createProjectiles: Warning! Safe zone center out of bounds, cannot spawn projectiles.");
+		return;
+	}
+
+	float leftEnd = safeZoneCenter - (safeZone->getWidth() / 2);
+	if (leftEnd < leftStart) leftEnd = leftStart;
+	float rightStart = safeZoneCenter + (safeZone->getWidth() / 2);
+	if (rightStart > rightEnd) rightStart = rightEnd;
+
 
 	LM.writeLog("ProjectileManager::createProjectiles::Safe zone pos: %f", safeZoneCenter);
 
-	int leftEnd = safeZoneCenter - (safeZone->getWidth() / 2); //0 - left end of safe zone
-	int rightStart = safeZoneCenter + (safeZone->getWidth() / 2); //right end of safe zone - max screen width
-	int rightEnd = DM.getHorizontalChars();
-
-	//spawn 1 projectile per ever other char position, avoiding the safe zone
-	if (leftEnd < 5) leftEnd = 5;
-	if (rightStart > DM.getHorizontalChars()-5) rightStart = DM.getHorizontalChars() -5;
-
-	int leftSpawnCount = leftEnd / 10; //every other position
-	int rightSpawnCount = (rightEnd - rightStart) /10; //every other position
+	int leftSpawnCount = (leftEnd - leftStart) / 5; //every other position
+	int rightSpawnCount = (rightEnd - rightStart) /5; //every other position
 
 	//we want spikes to drop sooner when further away from safe zone
 	float yPos = 0;
 	for (int i = 0; i < leftSpawnCount; i++) {
-		float xPos = float(i * 5 + 1); //+1 to avoid spawning at 0
-		createProjectile(xPos, yPos);
+		float xPos = float(leftStart + i * 5 + 1); //+1 to avoid spawning at 0
+		createProjectile(xPos,0);
 		yPos -= 1; //further left, lower y pos (so it falls sooner)
 	}
 	yPos = -rightSpawnCount;
 	for (int i = 0; i < rightSpawnCount; i++) {
 		float xPos = float(rightStart + i * 5 + 1); //+1 to avoid spawning at 0
-		createProjectile(xPos, yPos);
+		createProjectile(xPos, 0);
 		yPos += 1;
 	}
 }

@@ -31,7 +31,9 @@ private:
 	int eventHandler(const df::Event* p_event) override;
 	~ProjectileManager();
 	bool spawning = false;
-	const float SPAWN_INTERVAL = 500.0f; //miliseconds
+	const float SPAWN_INTERVAL = 1000.0f; //miliseconds
+	bool initial_offset = true;
+	const float INITIAL_OFFSET = 100.0f; //first spawn after 100ms
 	float lastSpawnTime = 0;
 	SafeZone* safeZone = nullptr;
 };

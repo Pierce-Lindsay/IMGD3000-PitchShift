@@ -82,23 +82,33 @@ void GameManager::run()
 
 	LM.writeLog("GameManager::run:GameManager is now running!");
 	EventStep steps;
+	Clock ck2;
 
 	while (!game_over)
 	{
 		frameClock.delta();
+		//ck2.delta();
 		//inputs
 
 		//update world
 		//send step event
 		onEvent(&steps);
 
+		//std::cout <<"Frame: " <<steps.getStepCount() << " step 1 miliseconds: " << ck2.delta() / 1000.0f << '\n';
+
 		IM.getInput();
 
+		//std::cout << "Frame: " << "step input miliseconds: " << ck2.delta()/1000.0f << '\n';
+
 		WM.update();
+
+		ck2.delta();
 
 		//render
 
 		WM.draw();
+
+		//std::cout << "Frame: " << "step draw miliseconds: " << ck2.delta() / 1000.0f << '\n';
 
 		//clear buffers and render frame
 		DM.swapBuffers();
@@ -120,6 +130,7 @@ void GameManager::run()
 			}
 		}
 		delta_time = loop_time / 1000; //in miliseconds
+
 
 		if (steps.getStepCount() % 20 == 0)
 		{
