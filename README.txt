@@ -1,9 +1,9 @@
-Pierce Lindsay (ptlinday@wpi.edu)
+Pierce Lindsay (ptlinday@wpi.edu), Hung Dao (hdao@wpi.edu)
 IMGD 3000
 Professor Claypool
-9/29/2025
+10/6/2025
 
-Dragonfly Game Engine Project 2 Part C
+Dragonfly Game Engine Project 3
 
 Platform: Windows
 
@@ -26,10 +26,10 @@ Project configuration/dependencies:
 	-The project should be able to be complied with ctrl-shift-B or f5 to compile and run.
 
 Project structure:
-	
-	-The project is structured into three folders: app, engine, and assets. Engine contains all the
-	required code for Project2C sorted into folders based on catergories. Aduio class are in audio, graphics related classes are in graphics, etc.
-	App contains the entry point and the test code. Assets contains the fonts, sounds, sprites, and music organized into subfolders..
+
+	-The project is structured into four folders: app, engine, assets, and tests. Engine contains all the
+	required code for Project2 sorted into folders based on catergories. Aduio class are in audio, graphics related classes are in graphics, etc.
+	App contains the entry point and the game Pitch SHift. Assets contains the fonts, sounds, sprites, and music organized into subfolders..
 
 	-In main, the test class is called and it handles all the unit tests and then runs a an
 	integrated test that tests specific functionalities that can't be tested with unit tests easily

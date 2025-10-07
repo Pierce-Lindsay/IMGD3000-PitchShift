@@ -139,3 +139,8 @@ void ProjectileManager::setSpawing(bool b)
 	}
 	spawning = b;
 }
+
+SafeZone* ProjectileManager::getSafeZone() const
+{
+	return safeZone;
+}

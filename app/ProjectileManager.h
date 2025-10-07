@@ -26,8 +26,11 @@ public:
 	/// Sets the spawning state.
 	/// </summary>
 	void setSpawing(bool b);
-	
-private: 
+
+
+	SafeZone* getSafeZone() const;
+
+private:
 	int draw() override; //not drawable
 	int eventHandler(const df::Event* p_event) override;
 	~ProjectileManager();
