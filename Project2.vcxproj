@@ -151,7 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app\Countdown.cpp" />
     <ClCompile Include="app\EventChangeColor.cpp" />
+    <ClCompile Include="app\EventCountdownFinished.cpp" />
     <ClCompile Include="app\Floor.cpp" />
     <ClCompile Include="app\FloorManager.cpp" />
     <ClCompile Include="app\game.cpp" />
@@ -194,7 +196,9 @@
     <ClCompile Include="engine\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="app\Countdown.h" />
     <ClInclude Include="app\EventChangeColor.h" />
+    <ClInclude Include="app\EventCountdownFinished.h" />
     <ClInclude Include="app\Floor.h" />
     <ClInclude Include="app\FloorManager.h" />
     <ClInclude Include="app\Player.h" />

@@ -6,6 +6,7 @@
 #include "../engine/Utility.h"
 #include "../engine/graphics/Color.h"
 #include "../engine/game/GameManager.h"
+#include "EventCountdownFinished.h"
 #include <array>
 
 std::array<std::string, 2> sprite_labels = {"projectile2" }; //potential sprites for projectiles
@@ -27,13 +28,22 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 		LM.writeLog("ProjectileManager::eventHandler: Warning! No safe zone provided, cannot spawn projectiles.");
 		return 0;
 	}
-	if (p_event->getType() == df::STEP_EVENT) {
-		const df::EventStep* p_step = dynamic_cast<const df::EventStep*>(p_event);
-		if (p_step->getStepCount() == 150) //start spawing after 150 steps
-		{
-			spawning = true;
-			safeZone->start();
+
+
+	if (p_event->getType() == COUNTDOWN_FINISHED_EVENT)
+	{
+		//sending event means its done, this is our notification
+		const EventCountdownFinished* p_countdown_event = dynamic_cast<const EventCountdownFinished*>(p_event);
+		if (p_countdown_event) {
+			setSpawing(true);
+			LM.writeLog("ProjectileManager::eventHandler: Countdown finished, starting spawning and safe zone.");
 		}
+		return 1;
+	}
+	else if (p_event->getType() == df::STEP_EVENT) 
+	{
+		const df::EventStep* p_step = dynamic_cast<const df::EventStep*>(p_event);
+
 		float curTime = 0;
 
 		if((safeZone->hasStarted() && spawning) && 
@@ -124,5 +134,8 @@ bool ProjectileManager::getSpawing() const
 
 void ProjectileManager::setSpawing(bool b) 
 {
+	if (b) {
+		safeZone->start();
+	}
 	spawning = b;
 }

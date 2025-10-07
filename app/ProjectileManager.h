@@ -2,6 +2,7 @@
 #include "projectile.h"
 #include "../engine/game/Object.h"
 #include "SafeZone.h"
+#include "../engine/Clock.h"
 
 class ProjectileManager : public df::Object {
 public:
@@ -36,4 +37,5 @@ private:
 	const float INITIAL_OFFSET = 100.0f; //first spawn after 100ms
 	float lastSpawnTime = 0;
 	SafeZone* safeZone = nullptr;
+
 };
