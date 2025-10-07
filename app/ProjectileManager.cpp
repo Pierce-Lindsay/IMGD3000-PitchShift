@@ -17,7 +17,14 @@ ProjectileManager::ProjectileManager(SafeZone* safeZone) {
 	setSolidness(df::Solidness::SPECTRAL);
 	this->safeZone = safeZone;
 }
-ProjectileManager::~ProjectileManager() {}
+ProjectileManager::~ProjectileManager() 
+{
+	//safeZone is handled by this
+	if(safeZone) {
+		delete safeZone;
+		safeZone = nullptr;
+	}
+}
 
 int ProjectileManager::draw() {
 	return 0; //not drawable

@@ -12,9 +12,10 @@
 #include "Portal.h"
 #include "Floor.h"
 #include "SafeZone.h"
+#include "Countdown.h"
 #include <vector>
 
-SafeZone* safeZone = nullptr;
+SafeZone* safeZone = nullptr; //needs to be handled by someone else
 FloorManager* floorManager = nullptr;
 std::vector<float> safePositions =
 { 30.0f, 60.0f, 20.0f, 30.0f, 60.0f, 30.0f, //6
@@ -99,6 +100,9 @@ void GameStart::start() {
 	if(p_music != NULL) {
 		p_music->stop();
 	}
+
+	Countdown* cd = new Countdown;
+	cd->start();
 
 	WM.markForDelete(this); // self delete
 }

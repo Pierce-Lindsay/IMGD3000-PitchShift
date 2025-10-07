@@ -19,13 +19,13 @@ int Countdown::draw() {
 	if (!started || finished) 
 		return 0;
 
-	int seconds = initial_time - countdownClock.split() / 1000000.0f;
+	int seconds = (initial_time - countdownClock.split() / 1000.0f)/1000.f;
 	if (seconds < 0)
 	{
 		enableFinished();
 		return 0;
 	}
-	std::string to_draw = std::to_string(seconds + 1); //add one so it shows 3, 2, 1, GO!
+	std::string to_draw = std::to_string(seconds); //add one so it shows 3, 2, 1, GO!
 	return DM.drawCh(getPosition(), to_draw[0], df::YELLOW);
 }
 

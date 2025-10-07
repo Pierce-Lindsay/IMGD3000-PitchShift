@@ -6,6 +6,7 @@
 #include "../engine/game/GameManager.h"
 #include "../engine/game/ObjectList.h"
 #include "../engine/graphics/Sprite.h"
+#include "../engine/ResourceManager.h"
 
 #include "../engine/game/EventOut.h"
 #include "../engine/game/EventStep.h"
@@ -34,14 +35,8 @@ Player::Player() {
 }
 
 Player::~Player() {
-	//df::ObjectList ol = WM.getAllObjects();
-	//for (int i = 0; i < ol.getCount(); i++) {
-	//	WM.markForDelete(ol[i]);
-	//}
-
-	//new GameStart;
-
-	GM.setGameOver();
+	getSprite()->setColor(df::WHITE); //reset color in case it was changed
+	new GameOver;
 }
 
 int Player::eventHandler(const df::Event* p_e) {
@@ -189,6 +184,7 @@ void Player::hit(const df::EventCollision* p_collision_event) {
 			health -= 1;
 			isHit = true;
 			invincibility_timer = invincibility_duration;
+			RM.getSound("explode")->play();
 			if (health <= 0) {
 				LM.writeLog("Player::eventHandler: Player health depleted, game over");
 				WM.markForDelete(this);

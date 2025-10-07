@@ -7,6 +7,8 @@
 class ProjectileManager : public df::Object {
 public:
 	ProjectileManager(SafeZone* safeZone);
+
+	~ProjectileManager();
 	/// <summary>
 	/// Creates a projectile in a position according to...
 	/// </summary>
@@ -33,7 +35,6 @@ public:
 private:
 	int draw() override; //not drawable
 	int eventHandler(const df::Event* p_event) override;
-	~ProjectileManager();
 	bool spawning = false;
 	const float SPAWN_INTERVAL = 1000.0f; //miliseconds
 	bool initial_offset = true;

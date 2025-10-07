@@ -20,6 +20,7 @@ void initResources()
 	RM.loadMusic("phantom.wav", "mainMusic");
 	RM.loadMusic("start-music.wav", "startMusic");
 	RM.loadSound("game-over.wav", "gameOver");
+	RM.loadSound("explode.wav", "explode");
 }
 
 /// <summary>
