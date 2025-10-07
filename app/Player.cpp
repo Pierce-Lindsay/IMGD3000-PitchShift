@@ -8,6 +8,7 @@
 
 #include "../engine/game/EventOut.h"
 #include "../engine/game/EventStep.h"
+#include "EventChangeColor.h"
 
 Player::Player() {
 	setType("Player");
@@ -137,10 +138,14 @@ void Player::move() {
 void Player::step() {
 
 	if(should_teleport)
-		{
+	{
 		LM.writeLog("Player::step: Teleporting player to (%f, %f)", teleport_position.x, teleport_position.y);
 		setPosition(teleport_position);
 		should_teleport = false;
+
+		EventChangeColor color_event;
+		color_event.setToHigherPitch(true);
+		WM.onEvent(&color_event);
 	}
 	move();
 
@@ -180,7 +185,6 @@ void Player::hit(const df::EventCollision* p_collision_event) {
 }
 
 void Player::teleport(const EventTeleport* p_teleport_event) {
-
 	if (p_teleport_event->isToHigherPitch()) {
 		LM.writeLog("Player::teleport: Teleporting to higher pitch");
 		teleport_position = df::Vector(7.0f, getPosition().y);

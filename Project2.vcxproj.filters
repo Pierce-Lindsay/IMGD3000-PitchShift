@@ -132,6 +132,9 @@
     <ClCompile Include="app\SafeZone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="app\EventChangeColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\Manager.h">
@@ -251,6 +254,9 @@
     <ClInclude Include="app\SafeZone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="app\EventChangeColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\sprites\invalid-widths.txt" />
@@ -265,5 +271,6 @@
     <Text Include="assets\sprites\turquoise-portal.txt" />
     <Text Include="assets\sprites\floor.txt" />
     <Text Include="assets\sprites\orange-portal.txt" />
+    <Text Include="assets\sprites\player.txt" />
   </ItemGroup>
 </Project>
