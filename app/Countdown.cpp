@@ -1,5 +1,7 @@
 #include "Countdown.h"
 #include "../engine/graphics/DisplayManager.h"
+#include "EventCountdownFinished.h"
+#include "../engine/game/WorldManager.h"
 
 Countdown::Countdown() {
 	setType("Countdown");
@@ -14,16 +16,26 @@ void Countdown::start() {
 }
 
 int Countdown::draw() {
-	if (!started) 
+	if (!started || finished) 
 		return 0;
 
 	int seconds = initial_time - countdownClock.split() / 1000000.0f;
 	if (seconds < 0)
+	{
+		enableFinished();
 		return 0;
+	}
 	std::string to_draw = std::to_string(seconds + 1); //add one so it shows 3, 2, 1, GO!
 	return DM.drawCh(getPosition(), to_draw[0], df::YELLOW);
 }
 
 bool Countdown::isFinished() const {
-	return countdownClock.split() / 1000.0f > initial_time / 1000.0f;
+	return finished;
+}
+
+void Countdown::enableFinished()
+{
+	finished = true;
+	df::Event* p_event = new EventCountdownFinished();
+	WM.onEvent(p_event);
 }

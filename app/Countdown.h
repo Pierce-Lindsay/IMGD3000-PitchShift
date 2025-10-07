@@ -23,5 +23,10 @@ class Countdown : public df::Object {
 		float initial_time = 5000; //initial time in milliseconds
 		df::Clock countdownClock;
 		bool started = false;
+		bool finished = false;
 
+		/// <summary>
+		/// Set to the finished state, meaning it won't draw anything. Send finished event.
+		/// </summary>
+		void enableFinished();
 };
