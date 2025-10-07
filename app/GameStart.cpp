@@ -34,7 +34,9 @@ std::vector<float> safePositions =
  30.0f, 60.0f, 20.0f, 30.0f, 60.0f, 70.0f, //84
 30.0f, 5.0f, 20.0f, 40.0f, 70.0f, 10.0f, //90
 50.0f, 75.0f, 15.0f, 40.0f //94
-}; //every half second for ... seconds
+}; //every second
+
+
 
 GameStart::GameStart() {
 	setType("GameStart");
@@ -75,6 +77,7 @@ void GameStart::playMusic() {
 }
 
 void GameStart::start() {
+
 	// Create 2 portals, one going to higher pitch, one to lower pitch
 	Portal* p1 = new Portal;
 	p1->setToHigherPitch(true);

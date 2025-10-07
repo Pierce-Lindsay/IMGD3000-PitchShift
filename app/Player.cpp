@@ -205,3 +205,8 @@ void Player::teleport(const EventTeleport* p_teleport_event) {
 	should_teleport = true;
 	LM.writeLog("Player::teleport: Player position after teleport: (%f, %f)", teleport_position.x, teleport_position.y);
 }
+
+void Player::kill() {
+	LM.writeLog("Player::kill: Player killed");
+	WM.markForDelete(this);
+}

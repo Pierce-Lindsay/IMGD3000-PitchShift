@@ -1,5 +1,7 @@
 #include "SafeZone.h"
 #include "../engine/LogManager.h"
+#include "../engine/game/worldManager.h"
+#include "Player.h"
 
 SafeZone::SafeZone(std::vector<float>& safePositions, float positionSpacingSeconds, df::Music* music) : safePositions(safePositions), positionSpacingSeconds(positionSpacingSeconds), music(music)
 {
@@ -54,8 +56,21 @@ bool SafeZone::hasStarted() const
 
 void SafeZone::update()
 {
-	if(started && music->getMusic()->getStatus() != sf::SoundSource::Status::Playing)
+	if (started && music->getMusic()->getStatus() != sf::SoundSource::Status::Playing)
+	{
 		finished = true;
+		auto objs = WM.getAllObjects();
+		for(int i = 0; i < objs.getCount(); i++) {
+			auto obj = objs[i];
+			if(obj->getType() == "Player") {
+				Player* player = dynamic_cast<Player*>(obj);
+				if(player) {
+					player->kill(); //delete all projectiles when safe zone is finished
+				}
+			}
+		}
+	}
+		
 }
 
 float SafeZone::getWidth() const

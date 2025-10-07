@@ -50,5 +50,5 @@ class Player : public df::Object {
 
 		int getScore() const;
 
-
+		void kill(); //kill the player, end game
 };
