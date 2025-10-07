@@ -4,6 +4,7 @@
 #include "../engine/game/WorldManager.h"
 #include "../engine/graphics/DisplayManager.h"
 #include "../engine/game/GameManager.h"
+#include "../engine/graphics/Sprite.h"
 
 #include "../engine/game/EventOut.h"
 #include "../engine/game/EventStep.h"
@@ -143,8 +144,17 @@ void Player::step() {
 	}
 	move();
 
+	df::Sprite* p_sprite = getSprite();
+
 	if (isHit) {
 		invincibility_timer--;
+
+		if (invincibility_timer % 2 != 0) {
+			p_sprite->setColor(df::BLACK);
+		} else {
+			p_sprite->setColor(df::WHITE);
+		}
+
 		if (invincibility_timer <= 0) {
 			isHit = false;
 			invincibility_timer = 0;
