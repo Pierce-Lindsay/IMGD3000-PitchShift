@@ -9,6 +9,7 @@
 #include "../engine/game/EventOut.h"
 #include "../engine/game/EventStep.h"
 #include "EventChangeColor.h"
+#include "GameOver.h"
 
 Player::Player() {
 	setType("Player");
@@ -31,7 +32,7 @@ Player::Player() {
 }
 
 Player::~Player() {
-	GM.setGameOver();
+	new GameOver();
 }
 
 int Player::eventHandler(const df::Event* p_e) {
