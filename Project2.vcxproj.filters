@@ -126,6 +126,12 @@
     <ClCompile Include="app\Portal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="app\Floor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\SafeZone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\Manager.h">
@@ -239,6 +245,12 @@
     <ClInclude Include="app\Portal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="app\Floor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\SafeZone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\sprites\invalid-widths.txt" />
@@ -250,7 +262,8 @@
     <Text Include="assets\sprites\frazzle-spr.txt" />
     <Text Include="assets\sprites\projectile1.txt" />
     <Text Include="assets\sprites\projectile2.txt" />
-    <Text Include="assets\sprites\portal.txt" />
+    <Text Include="assets\sprites\turquoise-portal.txt" />
     <Text Include="assets\sprites\floor.txt" />
+    <Text Include="assets\sprites\orange-portal.txt" />
   </ItemGroup>
 </Project>

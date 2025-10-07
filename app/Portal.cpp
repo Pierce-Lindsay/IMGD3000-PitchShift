@@ -12,7 +12,6 @@ Portal::Portal() {
 	cooldown_timer = 0;
 	setAltitude(1);
 	setSolidness(df::Solidness::SOFT);
-	setSprite("portal");
 	if (getSprite() == NULL) {
 		LM.writeLog("Portal::Portal: Warning! Sprite not found: portal");
 		return;
