@@ -157,6 +157,8 @@
     <ClCompile Include="app\Floor.cpp" />
     <ClCompile Include="app\FloorManager.cpp" />
     <ClCompile Include="app\game.cpp" />
+    <ClCompile Include="app\GameOver.cpp" />
+    <ClCompile Include="app\GameStart.cpp" />
     <ClCompile Include="app\Player.cpp" />
     <ClCompile Include="app\Portal.cpp" />
     <ClCompile Include="app\Projectile.cpp" />
@@ -201,6 +203,8 @@
     <ClInclude Include="app\EventCountdownFinished.h" />
     <ClInclude Include="app\Floor.h" />
     <ClInclude Include="app\FloorManager.h" />
+    <ClInclude Include="app\GameOver.h" />
+    <ClInclude Include="app\GameStart.h" />
     <ClInclude Include="app\Player.h" />
     <ClInclude Include="app\Portal.h" />
     <ClInclude Include="app\Projectile.h" />
@@ -244,6 +248,8 @@
     <Text Include="assets\sprites\chunk-spr.txt" />
     <Text Include="assets\sprites\floor.txt" />
     <Text Include="assets\sprites\frazzle-spr.txt" />
+    <Text Include="assets\sprites\game-over.txt" />
+    <Text Include="assets\sprites\game-start.txt" />
     <Text Include="assets\sprites\good-test1.txt" />
     <Text Include="assets\sprites\invalid-frame-count1.txt" />
     <Text Include="assets\sprites\invalid-frame-count2.txt" />

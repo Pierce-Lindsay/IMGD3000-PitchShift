@@ -4,11 +4,14 @@
 #include "../engine/game/WorldManager.h"
 #include "../engine/graphics/DisplayManager.h"
 #include "../engine/game/GameManager.h"
+#include "../engine/game/ObjectList.h"
 #include "../engine/graphics/Sprite.h"
 
 #include "../engine/game/EventOut.h"
 #include "../engine/game/EventStep.h"
 #include "EventChangeColor.h"
+#include "GameOver.h"
+#include "GameStart.h"
 
 Player::Player() {
 	setType("Player");
@@ -31,6 +34,13 @@ Player::Player() {
 }
 
 Player::~Player() {
+	//df::ObjectList ol = WM.getAllObjects();
+	//for (int i = 0; i < ol.getCount(); i++) {
+	//	WM.markForDelete(ol[i]);
+	//}
+
+	//new GameStart;
+
 	GM.setGameOver();
 }
 
