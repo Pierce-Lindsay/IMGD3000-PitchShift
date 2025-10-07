@@ -27,7 +27,7 @@ float SafeZone::getSafeZone()
 
 	float lower_val = safePositions[lower_index];
 	float upper_val = safePositions[upper_index];
-	float t = (current_position_sec - (lower_index * positionSpacingSeconds)) / positionSpacingSeconds;
+	float t = (current_position_sec - (lower_index * positionSpacingSeconds)) / positionSpacingSeconds; //find aplha between the two positions
 	return lerp(lower_val, upper_val, t); //linear interpolation between the two positions
 }
 

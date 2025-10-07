@@ -88,7 +88,6 @@ void ProjectileManager::createProjectile(float xPos, float yPos) {
 		LM.writeLog("ProjectileManager::createProjectile: Warning! Could not create projectile");
 		return;
 	}
-	//LM.writeLog("ProjectileManager::createProjectile: Created projectile %d at x: %f, speed: %f", p->getID(), xPos, speed);
 }
 
 
@@ -107,7 +106,7 @@ void ProjectileManager::createProjectiles() {
 		LM.writeLog("ProjectileManager::createProjectiles: Warning! Safe zone center out of bounds, cannot spawn projectiles.");
 		return;
 	}
-
+	//ensure we don't spawn inside the safe zone or too close to the edges
 	float leftEnd = safeZoneCenter - (safeZone->getWidth() / 2);
 	if (leftEnd < leftStart) leftEnd = leftStart;
 	float rightStart = safeZoneCenter + (safeZone->getWidth() / 2);
@@ -119,18 +118,18 @@ void ProjectileManager::createProjectiles() {
 	int leftSpawnCount = (leftEnd - leftStart) / 5; //every other position
 	int rightSpawnCount = (rightEnd - rightStart) /5; //every other position
 
-	//we want spikes to drop sooner when further away from safe zone
-	float yPos = 0;
+	//ypos shift disabled for now //spawn in availabile spaces with fixed shift
+	//float yPos = 0;
 	for (int i = 0; i < leftSpawnCount; i++) {
 		float xPos = float(leftStart + i * 5 + 1); //+1 to avoid spawning at 0
 		createProjectile(xPos,0);
-		yPos -= 1; //further left, lower y pos (so it falls sooner)
+
 	}
-	yPos = -rightSpawnCount;
+	//yPos = -rightSpawnCount;
 	for (int i = 0; i < rightSpawnCount; i++) {
 		float xPos = float(rightStart + i * 5 + 1); //+1 to avoid spawning at 0
 		createProjectile(xPos, 0);
-		yPos += 1;
+		//yPos += 1;
 	}
 }
 

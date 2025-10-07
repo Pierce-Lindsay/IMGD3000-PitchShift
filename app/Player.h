@@ -4,6 +4,9 @@
 #include "../engine/game/EventCollision.h"
 #include "EventTeleport.h"
 
+/// <summary>
+/// Class for the player object, handles movement, health, score, and collisions of player.
+/// </summary>
 class Player : public df::Object {
 	private:
 		const float TELEPORT_DELTA = 7;

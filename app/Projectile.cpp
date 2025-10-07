@@ -24,7 +24,7 @@ int Projectile::eventHandler(const df::Event* p_event)
 {
 	if(p_event->getType() == df::OUT_EVENT) {
 		const df::EventOut* p_out_event = dynamic_cast<const df::EventOut*>(p_event);
-		LM.writeLog("Projectile::eventHandler: Projectile %d out of bounds below, deleting", getID());
+		//LM.writeLog("Projectile::eventHandler: Projectile %d out of bounds below, deleting", getID());
 		if (getPosition().y > DM.getVerticalChars() + 5) //went out bottom of screen with some leeway
 		WM.markForDelete(this);
 		return 1;
@@ -32,7 +32,7 @@ int Projectile::eventHandler(const df::Event* p_event)
 	else if(p_event->getType() == df::COLLISION_EVENT) 
 	{
 		const df::EventCollision* p_collision_event = dynamic_cast<const df::EventCollision*>(p_event);
-		LM.writeLog("Projectile::eventHandler: Projectile %d collision", getID());
+		//LM.writeLog("Projectile::eventHandler: Projectile %d collision", getID());
 		WM.markForDelete(this);
 		return 1;
 	}

@@ -2,6 +2,9 @@
 #include "../engine/game/Object.h"
 #include "../engine/audio/Sound.h"
 
+/// <summary>
+/// Class for handling game over of game.
+/// </summary>
 class GameOver : public df::Object {
 	private:
 		int time_to_live; //time in frames to live
@@ -10,8 +13,11 @@ class GameOver : public df::Object {
 		// Update each frame
 		void step();
 	public:
+		//create a new game over object
 		GameOver();
-		~GameOver();
-		int eventHandler(const df::Event* p_e) override;
 
+		//clean up
+		~GameOver();
+
+		int eventHandler(const df::Event* p_e) override;
 };

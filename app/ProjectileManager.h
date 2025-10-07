@@ -4,6 +4,9 @@
 #include "SafeZone.h"
 #include "../engine/Clock.h"
 
+/// <summary>
+/// Handles spawning projectiles outside the safe zone once music has started playing and gameplay has started.
+/// </summary>
 class ProjectileManager : public df::Object {
 public:
 	ProjectileManager(SafeZone* safeZone);
@@ -29,17 +32,19 @@ public:
 	/// </summary>
 	void setSpawing(bool b);
 
-
+	/// <summary>
+	/// Get pointer to the safe zone.
+	/// </summary>
 	SafeZone* getSafeZone() const;
 
 private:
 	int draw() override; //not drawable
 	int eventHandler(const df::Event* p_event) override;
 	bool spawning = false;
-	const float SPAWN_INTERVAL = 1000.0f; //miliseconds
-	bool initial_offset = true;
-	const float INITIAL_OFFSET = 100.0f; //first spawn after 100ms
-	float lastSpawnTime = 0;
+	const float SPAWN_INTERVAL = 958.33f; //miliseconds //aligned with beat
+	bool initial_offset = true; // is this the first spawn with initial offset?
+	const float INITIAL_OFFSET = 0.0f; //first spawn after 100ms
+	float lastSpawnTime = 0; //last time we spawned.
 	SafeZone* safeZone = nullptr;
 
 };
