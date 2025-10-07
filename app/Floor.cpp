@@ -4,6 +4,7 @@
 #include "../engine/game/WorldManager.h"
 #include "../engine/graphics/Animation.h"
 #include "../engine/graphics/Sprite.h"
+#include "../engine/game/EventStep.h"
 
 Floor::Floor() {
 	setType("Floor");
@@ -21,15 +22,15 @@ Floor::~Floor() {
 }
 
 int Floor::eventHandler(const df::Event* p_e) {
-	if (p_e->getType() == TELEPORT_EVENT) {
-		const EventTeleport* p_teleport_event = dynamic_cast<const EventTeleport*>(p_e);
-		changeColor(p_teleport_event);
+	if (p_e->getType() == CHANGE_COLOR_EVENT) {
+		const EventChangeColor* p_color_event = dynamic_cast<const EventChangeColor*>(p_e);
+		changeColor(p_color_event);
 		return 1;
 	}
 	return 0;
 }
 
-void Floor::changeColor(const EventTeleport* p_teleport_event) {
+void Floor::changeColor(const EventChangeColor* p_color_event) {
 	df::Sprite* p_sprite = getSprite();
 	if (p_sprite == NULL) {
 		LM.writeLog("Floor::changeColor: Warning! Sprite not found: floor");
@@ -40,7 +41,7 @@ void Floor::changeColor(const EventTeleport* p_teleport_event) {
 	df::Color green = df::GREEN;
 	df::Color blue = df::BLUE;
 
-	if (p_teleport_event->isToHigherPitch()) {
+	if (p_color_event->isToHigherPitch()) {
 		if(isSameColor(p_sprite->getColor(), red)) {
 			LM.writeLog("Floor::changeColor: Changing floor color from RED to GREEN");
 			p_sprite->setColor(green);

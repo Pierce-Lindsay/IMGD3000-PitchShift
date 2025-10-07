@@ -132,6 +132,9 @@
     <ClCompile Include="app\SafeZone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="app\EventChangeColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\Manager.h">
@@ -249,6 +252,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="app\SafeZone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\EventChangeColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
