@@ -38,7 +38,7 @@ void initResources()
 	RM.loadSprite("floor.txt", "floor");
 	RM.loadSprite("turquoise-portal.txt", "turquoise-portal");
 	RM.loadSprite("orange-portal.txt", "orange-portal");
-	RM.loadSprite("chunk-spr.txt", "player");
+	RM.loadSprite("player.txt", "player");
 	RM.loadMusic("phantom.wav", "mainMusic");
 }
 

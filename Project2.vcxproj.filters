@@ -265,5 +265,6 @@
     <Text Include="assets\sprites\turquoise-portal.txt" />
     <Text Include="assets\sprites\floor.txt" />
     <Text Include="assets\sprites\orange-portal.txt" />
+    <Text Include="assets\sprites\player.txt" />
   </ItemGroup>
 </Project>

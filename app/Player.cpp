@@ -137,7 +137,7 @@ void Player::move() {
 void Player::step() {
 
 	if(should_teleport)
-		{
+	{
 		LM.writeLog("Player::step: Teleporting player to (%f, %f)", teleport_position.x, teleport_position.y);
 		setPosition(teleport_position);
 		should_teleport = false;
