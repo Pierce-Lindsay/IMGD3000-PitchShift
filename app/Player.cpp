@@ -35,8 +35,11 @@ Player::~Player() {
 int Player::eventHandler(const df::Event* p_e) {
 	if (p_e->getType() == df::OUT_EVENT) {
 		const df::EventOut* p_out_event = dynamic_cast<const df::EventOut*>(p_e);
-		LM.writeLog("Player::eventHandler: Player out of bounds, resetting position");
-		setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 5)));
+		if (!should_teleport)
+		{
+			LM.writeLog("Player::eventHandler: Player out of bounds, resetting position");
+			setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 5)));
+		}
 		return 1;
 	}
 
@@ -131,6 +134,13 @@ void Player::move() {
 }
 
 void Player::step() {
+
+	if(should_teleport)
+		{
+		LM.writeLog("Player::step: Teleporting player to (%f, %f)", teleport_position.x, teleport_position.y);
+		setPosition(teleport_position);
+		should_teleport = false;
+	}
 	move();
 
 	if (isHit) {
@@ -160,13 +170,15 @@ void Player::hit(const df::EventCollision* p_collision_event) {
 }
 
 void Player::teleport(const EventTeleport* p_teleport_event) {
+
 	if (p_teleport_event->isToHigherPitch()) {
 		LM.writeLog("Player::teleport: Teleporting to higher pitch");
-		setPosition(df::Vector(7.0f, getPosition().y));
+		teleport_position = df::Vector(7.0f, getPosition().y);
 	}
 	else {
 		LM.writeLog("Player::teleport: Teleporting to lower pitch");
-		setPosition(df::Vector((float)(DM.getHorizontalChars() - 7), getPosition().y));
+		teleport_position = df::Vector((float)(DM.getHorizontalChars() - 7), getPosition().y);
 	}
-	LM.writeLog("Player::teleport: Player position after teleport: (%f, %f)", getPosition().x, getPosition().y);
+	should_teleport = true;
+	LM.writeLog("Player::teleport: Player position after teleport: (%f, %f)", teleport_position.x, teleport_position.y);
 }

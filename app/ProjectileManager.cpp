@@ -29,7 +29,7 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 	}
 	if (p_event->getType() == df::STEP_EVENT) {
 		const df::EventStep* p_step = dynamic_cast<const df::EventStep*>(p_event);
-		if (p_step->getStepCount() == 30) //start spawing after 30 steps
+		if (p_step->getStepCount() == 150) //start spawing after 150 steps
 		{
 			spawning = true;
 			safeZone->start();
@@ -87,11 +87,11 @@ void ProjectileManager::createProjectiles() {
 	int rightEnd = DM.getHorizontalChars();
 
 	//spawn 1 projectile per ever other char position, avoiding the safe zone
-	if (leftEnd < 0) leftEnd = 0;
-	if (rightStart > DM.getHorizontalChars()) rightStart = DM.getHorizontalChars();
+	if (leftEnd < 5) leftEnd = 5;
+	if (rightStart > DM.getHorizontalChars()-5) rightStart = DM.getHorizontalChars() -5;
 
-	int leftSpawnCount = leftEnd / 5; //every other position
-	int rightSpawnCount = (rightEnd - rightStart) / 5; //every other position
+	int leftSpawnCount = leftEnd / 10; //every other position
+	int rightSpawnCount = (rightEnd - rightStart) /10; //every other position
 
 	//we want spikes to drop sooner when further away from safe zone
 	float yPos = 0;

@@ -13,6 +13,8 @@ class Player : public df::Object {
 		int invincibility_timer; // frames of invincibility left
 		int invincibility_duration; // duration of invincibility in frames
 		bool isHit; // flag to indicate if player was hit
+		bool should_teleport; // flag to indicate if player should teleport
+		df::Vector teleport_position = df::Vector(0, 0); // position to teleport to
 
 		// Handle user input for movement
 		void handleInput(const df::EventKeyboard* p_keyboard_event);
@@ -43,4 +45,6 @@ class Player : public df::Object {
 		void setScore(int new_score);
 
 		int getScore() const;
+
+
 };
