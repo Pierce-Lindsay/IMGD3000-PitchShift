@@ -74,4 +74,9 @@ public:
 	/// and 0 if music is finished.
 	/// </summary>
 	float getMusicTime() const;
+
+	/// <summary>
+	/// Stop the music!
+	/// </summary>
+	void stopMusic();
 };

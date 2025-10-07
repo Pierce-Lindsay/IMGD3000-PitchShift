@@ -79,3 +79,10 @@ float SafeZone::getMusicTime() const
 		return 0;
 	return music->getMusic()->getPlayingOffset().asMilliseconds();
 }
+
+
+void SafeZone::stopMusic()
+{
+	if (music != NULL)
+		music->stop();
+}

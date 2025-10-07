@@ -5,6 +5,8 @@
 #include "../engine/game/ObjectList.h"
 #include "../engine/ResourceManager.h"
 #include "../engine/game/EventStep.h"
+#include "ProjectileManager.h"
+#include "SafeZone.h"
 
 #include "GameStart.h"
 
@@ -29,8 +31,20 @@ GameOver::~GameOver() {
 		p_sound->stop();
 	}
 
+	
+
 	df::ObjectList ol = WM.getAllObjects();
 	for (int i = 0; i < ol.getCount(); i++) {
+		if (ol[i]->getType() == "ProjectileManager")
+		{
+			ProjectileManager* pm = dynamic_cast<ProjectileManager*>(ol[i]);
+			if (pm != NULL)
+			{
+				SafeZone* sz = pm->getSafeZone();
+				if (sz != NULL)
+					sz->stopMusic();
+			}
+		}
 		WM.markForDelete(ol[i]);
 	}
 

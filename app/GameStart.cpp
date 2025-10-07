@@ -70,7 +70,7 @@ int GameStart::eventHandler(const df::Event* p_e) {
 
 void GameStart::playMusic() {
 	if (p_music != NULL) {
-		p_music->play();
+		p_music->play(true);
 	}
 }
 

@@ -1,9 +1,13 @@
 #pragma once
 #include "../engine/Event.h"
 
-const std::string COUNTDOWN_FINISHED_EVENT = "ountdown_finished";
+const std::string COUNTDOWN_FINISHED_EVENT = "countdown_finished";
 
-class EventCountdownFinished : public df::Event {
+/// <summary>
+/// Event for when the countdown finishes.
+/// </summary>
+class EventCountdownFinished : public df::Event 
+{
 	public:
 		EventCountdownFinished();
 };

@@ -9,7 +9,7 @@
 #include "EventCountdownFinished.h"
 #include <array>
 
-std::array<std::string, 2> sprite_labels = {"projectile2" }; //potential sprites for projectiles
+std::array<std::string, 1> sprite_labels = {"projectile2" }; //potential sprites for projectiles, more projectiles later
 
 
 ProjectileManager::ProjectileManager(SafeZone* safeZone) {

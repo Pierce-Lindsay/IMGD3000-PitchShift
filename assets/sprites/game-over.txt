@@ -4,4 +4,4 @@
 0
 white
 
-GAME_OVER
+GAME OVER

@@ -4,7 +4,7 @@
 0
 white
 
-#A/LEFT_ARROW:MOVE_LEFT#
-D/RIGHT_ARROW:MOVE_RIGHT
-#########P:PLAY#########
-#########Q:QUIT#########
+ A/LEFT ARROW:MOVE LEFT 
+D/RIGHT ARROW:MOVE RIGHT
+         P:PLAY         
+         Q:QUIT         
