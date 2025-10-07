@@ -1,6 +1,7 @@
 #include "../engine/game/GameManager.h"
 #include "../engine/graphics/DisplayManager.h"
 #include "../engine/ResourceManager.h"
+#include "FloorManager.h"
 #include "ProjectileManager.h"
 #include "Player.h"
 #include "Portal.h"
@@ -8,7 +9,9 @@
 #include "SafeZone.h"
 #include <vector>
 
+std::string floor_label("floor");
 SafeZone* safeZone = nullptr;
+FloorManager* floorManager = nullptr;
 std::vector<float> safePositions = 
 { 30.0f, 60.0f, 20.0f, 30.0f, 60.0f, 30.0f, //6
 10.0f, 30.0f, 10.0f, 70.0f, 20.0f, 10.0f, //12
@@ -35,7 +38,7 @@ void initResources()
 {
 	RM.loadSprite("projectile1.txt", "projectile1");
 	RM.loadSprite("projectile2.txt", "projectile2");
-	RM.loadSprite("floor.txt", "floor");
+	RM.loadSprite("floor.txt", floor_label);
 	RM.loadSprite("turquoise-portal.txt", "turquoise-portal");
 	RM.loadSprite("orange-portal.txt", "orange-portal");
 	RM.loadSprite("player.txt", "player");
@@ -63,6 +66,8 @@ void initObjects()
 		p_floor->setPosition(df::Vector((float)(i * 16 + 8), (float)(DM.getVerticalChars() - 2)));
 	}
 	safeZone = new SafeZone(safePositions, 1.0f, RM.getMusic("mainMusic"));
+	floorManager = new FloorManager(floor_label);
+
 	new ProjectileManager(safeZone);
 
 	new Player;
@@ -76,6 +81,6 @@ int main() {
 	initResources();
 	initObjects();
 	GM.run();
-	//delete safeZone;
+	delete safeZone;
     return 0;
 }

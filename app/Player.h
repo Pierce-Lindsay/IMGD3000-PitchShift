@@ -6,6 +6,7 @@
 
 class Player : public df::Object {
 	private:
+		const float TELEPORT_DELTA = 7;
 		int health; // player health
 		int score; // player score
 		float speed; // player speed

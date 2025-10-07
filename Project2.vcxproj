@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="app\EventChangeColor.cpp" />
     <ClCompile Include="app\Floor.cpp" />
+    <ClCompile Include="app\FloorManager.cpp" />
     <ClCompile Include="app\game.cpp" />
     <ClCompile Include="app\Player.cpp" />
     <ClCompile Include="app\Portal.cpp" />
@@ -195,6 +196,7 @@
   <ItemGroup>
     <ClInclude Include="app\EventChangeColor.h" />
     <ClInclude Include="app\Floor.h" />
+    <ClInclude Include="app\FloorManager.h" />
     <ClInclude Include="app\Player.h" />
     <ClInclude Include="app\Portal.h" />
     <ClInclude Include="app\Projectile.h" />

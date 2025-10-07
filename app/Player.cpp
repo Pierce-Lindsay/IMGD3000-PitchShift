@@ -144,7 +144,10 @@ void Player::step() {
 		should_teleport = false;
 
 		EventChangeColor color_event;
-		color_event.setToHigherPitch(true);
+		if(teleport_position.x == TELEPORT_DELTA)
+			color_event.setToHigherPitch(false);
+		else
+			color_event.setToHigherPitch(true);
 		WM.onEvent(&color_event);
 	}
 	move();
@@ -187,11 +190,11 @@ void Player::hit(const df::EventCollision* p_collision_event) {
 void Player::teleport(const EventTeleport* p_teleport_event) {
 	if (p_teleport_event->isToHigherPitch()) {
 		LM.writeLog("Player::teleport: Teleporting to higher pitch");
-		teleport_position = df::Vector(7.0f, getPosition().y);
+		teleport_position = df::Vector(TELEPORT_DELTA, getPosition().y);
 	}
 	else {
 		LM.writeLog("Player::teleport: Teleporting to lower pitch");
-		teleport_position = df::Vector((float)(DM.getHorizontalChars() - 7), getPosition().y);
+		teleport_position = df::Vector((float)(DM.getHorizontalChars() - TELEPORT_DELTA), getPosition().y);
 	}
 	should_teleport = true;
 	LM.writeLog("Player::teleport: Player position after teleport: (%f, %f)", teleport_position.x, teleport_position.y);
