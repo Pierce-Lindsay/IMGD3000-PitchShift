@@ -132,11 +132,11 @@ void GameManager::run()
 		delta_time = loop_time / 1000; //in miliseconds
 
 
-		if (steps.getStepCount() % 20 == 0)
-		{
+		//if (steps.getStepCount() % 20 == 0)
+		//{
 			//LM.writeLog("GameManager::run:Fps: %f!", 1.0f / (frameClock.split() / 1000000.0f));
-			std::cout << "GameManager::run:Fps: " << 1.0f / (delta_time/1000.0f) << '\n';
-		}
+			//std::cout << "GameManager::run:Fps: " << 1.0f / (delta_time/1000.0f) << '\n';
+		//}
 			
 
 		//step has passed, increment

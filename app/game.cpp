@@ -17,10 +17,13 @@ void initResources()
 	RM.loadSprite("player.txt", "player");
 	RM.loadSprite("game-start.txt", "game-start");
 	RM.loadSprite("game-over.txt", "game-over");
+	RM.loadSprite("right-arrow.txt", "right-arrow");
+	RM.loadSprite("left-arrow.txt", "left-arrow");
 	RM.loadMusic("phantom.wav", "mainMusic");
 	RM.loadMusic("start-music.wav", "startMusic");
 	RM.loadSound("game-over.wav", "gameOver");
 	RM.loadSound("explode.wav", "explode");
+	RM.loadSound("level_up.wav", "levelUp");
 }
 
 /// <summary>

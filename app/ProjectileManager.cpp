@@ -7,6 +7,7 @@
 #include "../engine/graphics/Color.h"
 #include "../engine/game/GameManager.h"
 #include "EventCountdownFinished.h"
+#include "Arrow.h"
 #include <array>
 
 std::array<std::string, 1> sprite_labels = {"projectile2" }; //potential sprites for projectiles, more projectiles later
@@ -53,22 +54,38 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 
 		float curTime = 0;
 
-		if((safeZone->hasStarted() && spawning) && 
-			(initial_offset && (curTime = safeZone->getMusicTime()) - lastSpawnTime >= INITIAL_OFFSET  || (curTime = safeZone->getMusicTime()) - lastSpawnTime >= SPAWN_INTERVAL))
+		if (safeZone->hasStarted() && spawning)
 		{
-			if (initial_offset) initial_offset = false; //only apply initial offset once
+			curTime = safeZone->getMusicTime();
+			if ((initial_offset && curTime  - lastSpawnTime >= INITIAL_OFFSET) || 
+				(curTime - lastSpawnTime >= SPAWN_INTERVAL))
+			{
+				if (initial_offset) initial_offset = false; //only apply initial offset once
 
-			safeZone->update();
-			if (safeZone->isFinished()) 
-			{
-				spawning = false;
-				LM.writeLog("ProjectileManager::eventHandler: Safe zone finished, stopping spawning.");
-				return 1;
+				safeZone->update();
+				if (safeZone->isFinished())
+				{
+					spawning = false;
+					LM.writeLog("ProjectileManager::eventHandler: Safe zone finished, stopping spawning.");
+					return 1;
+				}
+				else
+				{
+					spawned_arrows = false;
+					createProjectiles(); //only create if not finished
+					lastSpawnTime = curTime;
+				}
 			}
-			else
+			else if (curTime - lastSpawnTime >= SPAWN_INTERVAL / 2.0f && !spawned_arrows) //get transition directionand spawn arrow
 			{
-				createProjectiles(); //only create if not finished
-				lastSpawnTime = curTime;
+				int dir = safeZone->getSafeZoneDeltaDirection();
+				if (dir == 0)
+					return 1;
+
+				if (dir != 1)
+					dir = 0;
+				new Arrow(dir, df::Vector(DM.getHorizontalChars() / 2, DM.getVerticalChars() / 2));
+				spawned_arrows = true;
 			}
 		}
 		return 1;
@@ -78,8 +95,7 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 
 void ProjectileManager::createProjectile(float xPos, float yPos) {
 	//create a projectile at the given x position
-	//float speed = 5 + (rand() % 10 + 1)/80.0f * GM.getDeltaTime();
-	float speed = 0.55;
+	float speed = 0.55 + (rand() % 10 + 1) / 80.0f;
 	//int sprite_roll = rand() % sprite_labels.size();
 	std::string sprite_label = sprite_labels[0];	
 	Projectile* p = new Projectile(df::Vector(xPos, yPos), df::RED, speed, sprite_label);
@@ -119,17 +135,18 @@ void ProjectileManager::createProjectiles() {
 	int rightSpawnCount = (rightEnd - rightStart) /5; //every other position
 
 	//ypos shift disabled for now //spawn in availabile spaces with fixed shift
-	//float yPos = 0;
+	float yPos = 0;
 	for (int i = 0; i < leftSpawnCount; i++) {
 		float xPos = float(leftStart + i * 5 + 1); //+1 to avoid spawning at 0
-		createProjectile(xPos,0);
+		createProjectile(xPos,yPos);
+		yPos -= 0.4f;
 
 	}
-	//yPos = -rightSpawnCount;
+	yPos = -rightSpawnCount * 0.4f;
 	for (int i = 0; i < rightSpawnCount; i++) {
 		float xPos = float(rightStart + i * 5 + 1); //+1 to avoid spawning at 0
-		createProjectile(xPos, 0);
-		//yPos += 1;
+		createProjectile(xPos, yPos);
+		yPos += 0.4f;
 	}
 }
 

@@ -43,6 +43,7 @@ private:
 	bool spawning = false;
 	const float SPAWN_INTERVAL = 958.33f; //miliseconds //aligned with beat
 	bool initial_offset = true; // is this the first spawn with initial offset?
+	bool spawned_arrows = false; //only once per projectile spawn
 	const float INITIAL_OFFSET = 0.0f; //first spawn after 100ms
 	float lastSpawnTime = 0; //last time we spawned.
 	SafeZone* safeZone = nullptr;

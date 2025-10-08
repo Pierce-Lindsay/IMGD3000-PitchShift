@@ -151,14 +151,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app\Arrow.cpp" />
     <ClCompile Include="app\Countdown.cpp" />
     <ClCompile Include="app\EventChangeColor.cpp" />
     <ClCompile Include="app\EventCountdownFinished.cpp" />
+    <ClCompile Include="app\EventLevelUp.cpp" />
     <ClCompile Include="app\Floor.cpp" />
     <ClCompile Include="app\FloorManager.cpp" />
     <ClCompile Include="app\game.cpp" />
     <ClCompile Include="app\GameOver.cpp" />
     <ClCompile Include="app\GameStart.cpp" />
+    <ClCompile Include="app\LevelDisplay.cpp" />
     <ClCompile Include="app\Player.cpp" />
     <ClCompile Include="app\Portal.cpp" />
     <ClCompile Include="app\Projectile.cpp" />
@@ -198,13 +201,16 @@
     <ClCompile Include="engine\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="app\Arrow.h" />
     <ClInclude Include="app\Countdown.h" />
     <ClInclude Include="app\EventChangeColor.h" />
     <ClInclude Include="app\EventCountdownFinished.h" />
+    <ClInclude Include="app\EventLevelUp.h" />
     <ClInclude Include="app\Floor.h" />
     <ClInclude Include="app\FloorManager.h" />
     <ClInclude Include="app\GameOver.h" />
     <ClInclude Include="app\GameStart.h" />
+    <ClInclude Include="app\LevelDisplay.h" />
     <ClInclude Include="app\Player.h" />
     <ClInclude Include="app\Portal.h" />
     <ClInclude Include="app\Projectile.h" />
@@ -255,8 +261,10 @@
     <Text Include="assets\sprites\invalid-frame-count2.txt" />
     <Text Include="assets\sprites\invalid-heights.txt" />
     <Text Include="assets\sprites\invalid-widths.txt" />
+    <Text Include="assets\sprites\left-arrow.txt" />
     <Text Include="assets\sprites\orange-portal.txt" />
     <Text Include="assets\sprites\player.txt" />
+    <Text Include="assets\sprites\right-arrow.txt" />
     <Text Include="assets\sprites\turquoise-portal.txt" />
     <Text Include="assets\sprites\projectile1.txt" />
     <Text Include="assets\sprites\projectile2.txt" />

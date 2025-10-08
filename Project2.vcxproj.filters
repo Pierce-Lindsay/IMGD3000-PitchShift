@@ -135,6 +135,30 @@
     <ClCompile Include="app\EventChangeColor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="app\Countdown.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\EventCountdownFinished.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\FloorManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\GameOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\GameStart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\EventLevelUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\LevelDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\Arrow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\Manager.h">
@@ -257,6 +281,30 @@
     <ClInclude Include="app\EventChangeColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="app\Countdown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\EventCountdownFinished.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\FloorManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\GameOver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\GameStart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\EventLevelUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\LevelDisplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\Arrow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\sprites\invalid-widths.txt" />
@@ -272,5 +320,9 @@
     <Text Include="assets\sprites\floor.txt" />
     <Text Include="assets\sprites\orange-portal.txt" />
     <Text Include="assets\sprites\player.txt" />
+    <Text Include="assets\sprites\game-over.txt" />
+    <Text Include="assets\sprites\game-start.txt" />
+    <Text Include="assets\sprites\right-arrow.txt" />
+    <Text Include="assets\sprites\left-arrow.txt" />
   </ItemGroup>
 </Project>

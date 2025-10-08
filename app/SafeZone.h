@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "../engine/audio/Music.h"
+#include "../engine/Clock.h"
 
 /// <summary>
 /// Class for handling the safe zone position over time according to the music and a list of safe positions.
@@ -8,7 +9,8 @@
 class SafeZone
 {
 private:
-	const float DEFAULT_SAFE_ZONE_WIDTH = 10.0f;
+	const float DEFAULT_SAFE_ZONE_WIDTH = 20.0f;
+	const float DEFAULT_MIN_SAFE_ZONE_WIDTH = 4.0f;
 	int size = 0; // 1/2 second positions
 	std::vector<float>& safePositions;
 	bool finished = false;
@@ -16,6 +18,10 @@ private:
 	float positionSpacingSeconds = 0; //how many seconds between each position in the list
 	df::Music* music = nullptr; //music to sync with
 	float width = DEFAULT_SAFE_ZONE_WIDTH; //width of the safe zone
+	df::Clock clock; //clock to track time since start
+	const float LEVEL_UP_TIME = 15000.0f; //time in ms after which the safe zone levels up (decreases in size)
+	const float LEVEL_UP_DECREASE = 2.0f; //amount to decrease the safe zone width after each level up
+	int level = 1; //current level of the safe zone, increases every LEVEL_UP_TIME
 
 	/// <summary>
 	/// Linear interpolation between a and b with t in [0,1].
@@ -41,6 +47,12 @@ public:
 	/// Get the current position of the safe zone (x coordinate) depending on the music time.
 	/// </summary>
 	float getSafeZone();
+
+	/// <summary>
+	/// Get the the direction the spawn zone will move in at the current music time.
+	/// </summary>
+	/// <returns>-1 for left or 1 for right, and return 0 on music time error.</returns>
+	int getSafeZoneDeltaDirection();
 
 	/// <summary>
 	/// Create a safe zone with the given list of safe positions 

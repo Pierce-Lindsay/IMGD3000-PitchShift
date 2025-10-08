@@ -5,7 +5,7 @@
 #include "../engine/game/WorldManager.h"
 #include "../engine/game/GameManager.h"
 #include "../engine/ResourceManager.h"
-
+#include "LevelDisplay.h"
 #include "FloorManager.h"
 #include "ProjectileManager.h"
 #include "Player.h"
@@ -88,6 +88,8 @@ void GameStart::start() {
 	p2->setToHigherPitch(false);
 	p2->setPosition(df::Vector(1.0f, (float)(DM.getVerticalChars() - 5)));
 	p2->setSprite("orange-portal");
+
+	new LevelDisplay;
 
 	for (int i = 0; i < 5; i++) {
 		Floor* p_floor = new Floor;
