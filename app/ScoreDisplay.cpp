@@ -10,6 +10,8 @@ ScoreDisplay::ScoreDisplay(Difficulty d)
 {
 	setType("score-display");
 	score_multi = static_cast<long long>(d);
+	setAltitude(df::MAX_ALTITUDE);
+	setSolidness(df::Solidness::SPECTRAL);
 
 	//first check if score file exists
 	std::ifstream read(SCORE_SAVE_FILE);
