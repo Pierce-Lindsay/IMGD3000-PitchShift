@@ -24,6 +24,7 @@ void initResources()
 	RM.loadSound("game-over.wav", "gameOver");
 	RM.loadSound("explode.wav", "explode");
 	RM.loadSound("level_up.wav", "levelUp");
+	RM.loadSound("teleport.wav", "teleport");
 }
 
 /// <summary>
