@@ -4,6 +4,7 @@
 #include "../engine/LogManager.h"
 #include "../engine/game/WorldManager.h"
 #include "../engine/game/GameManager.h"
+#include "../engine/game/EventStep.h"
 #include "../engine/ResourceManager.h"
 #include "LevelDisplay.h"
 #include "FloorManager.h"
@@ -44,6 +45,7 @@ GameStart::GameStart() {
 	setAltitude(df::MAX_ALTITUDE);
 	setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() / 2)));
 	setSprite("game-start");
+	difficulty = "Easy";
 
 	p_music = RM.getMusic("startMusic");
 	if (p_music == NULL) {
@@ -62,10 +64,52 @@ int GameStart::eventHandler(const df::Event* p_e) {
 		case df::Keyboard::Key::Q:			// quit
 			GM.setGameOver();
 			break;
+		case df::Keyboard::Key::RIGHT:	// increase difficulty
+			if (p_keyboard_event->getKeyboardAction() == df::EventKeyboardAction::KEY_PRESSED) {
+				if (difficulty == "Easy") {
+					difficulty = "Hard";
+				}
+				else if (difficulty == "Practice") {
+					difficulty = "Easy";
+				}
+				else if (difficulty == "Hard") {
+					difficulty = "Hard";
+				}
+			}
+			break;
+		case df::Keyboard::Key::LEFT:		// decrease difficulty
+			if (p_keyboard_event->getKeyboardAction() == df::EventKeyboardAction::KEY_PRESSED) {
+				if (difficulty == "Easy") {
+					difficulty = "Practice";
+				}
+				else if (difficulty == "Practice") {
+					difficulty = "Practice";
+				}
+				else if (difficulty == "Hard") {
+					difficulty = "Easy";
+				}
+			}
+			break;
 		default:
 			break;
 		}
 		return 1;
+	}
+
+	if (p_e->getType() == df::STEP_EVENT) {
+		df::Vector pos = df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 2.0f));
+		DM.drawString(df::Vector(pos.x, pos.y - 1.0f), "LEFT and RIGHT Arrow keys to change difficulty", df::Justification::CENTER, df::YELLOW);
+		df::Color color = df::YELLOW;
+		if (difficulty == "Practice") {
+			color = df::TURQUOISE;
+		}
+		else if (difficulty == "Easy") {
+			color = df::GREEN;
+		}
+		else if (difficulty == "Hard") {
+			color = df::RED;
+		}
+		DM.drawString(pos, "Difficulty: " + difficulty, df::Justification::CENTER, color);
 	}
 	return 0;
 }
@@ -100,7 +144,15 @@ void GameStart::start() {
 
 	new ProjectileManager(safeZone);
 
-	new Player;
+	Player* p_player = new Player;
+	if (difficulty == "Practice") {
+		p_player->setHealth(100);
+	} else if (difficulty == "Easy") {
+		p_player->setHealth(5);
+	}
+	else if (difficulty == "Hard") {
+		p_player->setHealth(1);
+	}
 
 	if(p_music != NULL) {
 		p_music->stop();
