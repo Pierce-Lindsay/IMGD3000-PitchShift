@@ -5,7 +5,7 @@ Genre: Rhythm/Music Survival game
 Engine: Pierce’s
 IMGD 3000
 
-Dragonfly Game Engine Project 3 - Alpha
+Dragonfly Game Engine Project 3 - Final
 
 Platform: Windows
 
@@ -92,6 +92,10 @@ Work Distribution
 	Portal(sprites, teleport feature)
 	Floor design(sprites/textures) , logic for color change
 	Game over/start/reset logic and sprites/sounds
+	Health Display
+	Tutorial
+	Title
+	Difficulty selection
 
 	Pierce Lindsay:
 	Projectile sprites, spawning management and safezone logic
@@ -99,6 +103,10 @@ Work Distribution
 	Countdown logic
 	Many bug fixes
 	Floor management (a little bit)
+	Updated Projectile spawn patterns, Difficulty/Level up logic, Color Change
+	Score system
+	High Score saving/loading
+	Updated the game ending to be indefinite until the player loses
 
 How to play:
 
@@ -106,4 +114,8 @@ How to play:
 	arrow keys to move the character left and right. Dodge the projectiles by moving with the pitch shifts.
 	You have to survive to the end of the song, taking less than 2 hits. Press 'q' to quit the game at any time.
 
-
+Expansions:
+	- Added a new difficulty: Practice
+	- Changed Easy mode health to 5 hits instead of 3
+	- Score system
+	- Game ending is now indefinite until the player loses
