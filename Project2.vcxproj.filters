@@ -165,7 +165,11 @@
     <ClCompile Include="app\EventGameEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="app\PlayerHealthDisplay.cpp">
+=======
+    <ClCompile Include="app\Title.cpp">
+>>>>>>> Stashed changes
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -320,10 +324,14 @@
     <ClInclude Include="app\EventGameEnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="app\Difficulty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="app\PlayerHealthDisplay.h">
+=======
+    <ClInclude Include="app\Title.h">
+>>>>>>> Stashed changes
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -345,5 +353,6 @@
     <Text Include="assets\sprites\game-start.txt" />
     <Text Include="assets\sprites\right-arrow.txt" />
     <Text Include="assets\sprites\left-arrow.txt" />
+    <Text Include="assets\sprites\title.txt" />
   </ItemGroup>
 </Project>
