@@ -89,6 +89,8 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 		current_color_index++;
 		if (current_color_index >= color_array.size())
 			current_color_index = 0;
+
+		projectile_speed += SPEED_LEVELUP_INCREASE;
 	}
 	return 0;
 }
