@@ -7,20 +7,19 @@
 /// Class for inititializing the game when the player presses 'P' to play.
 /// </summary>
 class GameStart : public df::Object {
+	private:
+		df::Music* p_music; //pointer to start music
+		std::string difficulty; // game difficulty
 
-private:
-	df::Music* p_music; //pointer to start music
+		// Start the game
+		void start();
+	public:
+		GameStart();
 
-	// Start the game
-	void start();
+		int eventHandler(const df::Event* p_e) override;
 
-public:
-	GameStart();
-
-	int eventHandler(const df::Event* p_e) override;
-
-	/// <summary>
-	/// play the start music
-	/// </summary>
-	void playMusic();
+		/// <summary>
+		/// play the start music
+		/// </summary>
+		void playMusic();
 };

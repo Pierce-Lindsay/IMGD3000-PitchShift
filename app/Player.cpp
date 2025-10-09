@@ -157,6 +157,8 @@ void Player::step() {
 	}
 	move();
 
+	DM.drawString(df::Vector(1.0f, 2.0f), "Health: " + std::to_string(health), df::Justification::RIGHT, df::GREEN);
+
 	df::Sprite* p_sprite = getSprite();
 
 	if (isHit) {

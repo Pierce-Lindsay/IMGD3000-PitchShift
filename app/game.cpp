@@ -20,7 +20,7 @@ void initResources()
 	RM.loadSprite("right-arrow.txt", "right-arrow");
 	RM.loadSprite("left-arrow.txt", "left-arrow");
 	RM.loadMusic("phantom.wav", "mainMusic");
-	RM.loadMusic("start-music.wav", "startMusic");
+	RM.loadMusic("shop.wav", "startMusic");
 	RM.loadSound("game-over.wav", "gameOver");
 	RM.loadSound("explode.wav", "explode");
 	RM.loadSound("level_up.wav", "levelUp");
