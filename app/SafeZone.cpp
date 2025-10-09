@@ -22,8 +22,6 @@ float SafeZone::getSafeZone()
 	int lower_index = (int)floor((current_position_sec / positionSpacingSeconds));
 	int upper_index = (int)ceil((current_position_sec / positionSpacingSeconds));
 
-	std::cout << upper_index << ", " << lower_index << '\n';
-
 	//clamp if neccessary
 	if (upper_index >= safePositions.size())
 		upper_index = safePositions.size()-1;
