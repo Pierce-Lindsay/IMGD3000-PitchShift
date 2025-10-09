@@ -49,6 +49,8 @@ GameStart::GameStart() {
 	setSprite("game-start");
 	difficulty = Difficulty::EASY;
 
+	p_title = new Title;
+
 	p_music = RM.getMusic("startMusic");
 	if (p_music == NULL) {
 		LM.writeLog("GameStart::GameStart: Warning! Music not found: startMusic");
@@ -167,5 +169,6 @@ void GameStart::start() {
 	Countdown* cd = new Countdown;
 	cd->start();
 
+	WM.markForDelete(p_title); // delete title
 	WM.markForDelete(this); // self delete
 }

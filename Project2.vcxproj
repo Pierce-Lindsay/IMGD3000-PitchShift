@@ -171,6 +171,7 @@
     <ClCompile Include="app\EventTeleport.cpp" />
     <ClCompile Include="app\SafeZone.cpp" />
     <ClCompile Include="app\ScoreDisplay.cpp" />
+    <ClCompile Include="app\Title.cpp" />
     <ClCompile Include="test\OutObject.cpp" />
     <ClCompile Include="test\SpriteObject.cpp" />
     <ClCompile Include="test\Test.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="app\EventTeleport.h" />
     <ClInclude Include="app\SafeZone.h" />
     <ClInclude Include="app\ScoreDisplay.h" />
+    <ClInclude Include="app\Title.h" />
     <ClInclude Include="test\OutObject.h" />
     <ClInclude Include="test\SpriteObject.h" />
     <ClInclude Include="test\Test.h" />
@@ -272,6 +274,7 @@
     <Text Include="assets\sprites\orange-portal.txt" />
     <Text Include="assets\sprites\player.txt" />
     <Text Include="assets\sprites\right-arrow.txt" />
+    <Text Include="assets\sprites\title.txt" />
     <Text Include="assets\sprites\turquoise-portal.txt" />
     <Text Include="assets\sprites\projectile2.txt" />
   </ItemGroup>
