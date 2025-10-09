@@ -280,6 +280,12 @@
     <Text Include="assets\sprites\turquoise-portal.txt" />
     <Text Include="assets\sprites\projectile2.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\PitchShiftImage.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app\app.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

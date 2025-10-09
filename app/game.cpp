@@ -1,5 +1,6 @@
 #include "../engine/game/GameManager.h"
 #include "../engine/ResourceManager.h"
+#include "../engine/graphics/DisplayManager.h"
 #include "GameStart.h"
 
 std::string floor_label("floor");
@@ -25,6 +26,16 @@ void initResources()
 	RM.loadSound("explode.wav", "explode");
 	RM.loadSound("level_up.wav", "levelUp");
 	RM.loadSound("teleport.wav", "teleport");
+
+	sf::Image icon;
+	if (icon.loadFromFile("assets/PitchShiftImage.png"))
+	{
+		
+		// Apply it as the window & taskbar icon
+		DM.getWindow()->setIcon(icon);
+	}
+
+
 }
 
 /// <summary>
