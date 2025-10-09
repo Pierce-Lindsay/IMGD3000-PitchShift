@@ -145,6 +145,7 @@ void Player::step() {
 	if(should_teleport)
 	{
 		LM.writeLog("Player::step: Teleporting player to (%f, %f)", teleport_position.x, teleport_position.y);
+		RM.getSound("teleport")->play();
 		setPosition(teleport_position);
 		should_teleport = false;
 
