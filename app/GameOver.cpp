@@ -51,7 +51,7 @@ GameOver::~GameOver() {
 		WM.markForDelete(ol[i]);
 	}
 
-	new GameStart();
+	new GameStart;
 }
 
 int GameOver::eventHandler(const df::Event* p_e) {

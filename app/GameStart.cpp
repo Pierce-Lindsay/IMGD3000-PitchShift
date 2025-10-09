@@ -42,6 +42,14 @@ std::vector<float> safePositions =
 
 
 GameStart::GameStart() {
+
+	auto objs = WM.objectsOfType("GameStart");
+	if (objs.getCount() != 0) //just in case
+	{
+		WM.markForDelete(this);
+		return;
+	}
+
 	setType("GameStart");
 	setSolidness(df::Solidness::SPECTRAL);
 	setAltitude(df::MAX_ALTITUDE);
@@ -59,6 +67,9 @@ GameStart::GameStart() {
 }
 
 int GameStart::eventHandler(const df::Event* p_e) {
+
+	if (getMarkForDelete()) //do nothing if should be deleted
+		return 0;
 	if (p_e->getType() == df::KEYBOARD_EVENT) {
 		df::EventKeyboard* p_keyboard_event = (df::EventKeyboard*)p_e;
 		switch (p_keyboard_event->getKey()) {
