@@ -9,7 +9,6 @@ std::string floor_label("floor");
 /// </summary>
 void initResources()
 {
-	RM.loadSprite("projectile1.txt", "projectile1");
 	RM.loadSprite("projectile2.txt", "projectile2");
 	RM.loadSprite("floor.txt", floor_label);
 	RM.loadSprite("turquoise-portal.txt", "turquoise-portal");

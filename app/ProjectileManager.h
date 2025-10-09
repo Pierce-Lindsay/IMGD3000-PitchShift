@@ -3,6 +3,8 @@
 #include "../engine/game/Object.h"
 #include "SafeZone.h"
 #include "../engine/Clock.h"
+#include "../engine/graphics/Color.h"
+#include <array>
 
 /// <summary>
 /// Handles spawning projectiles outside the safe zone once music has started playing and gameplay has started.
@@ -49,6 +51,11 @@ private:
 	const float BASE_PROJECTILE_SPEED = 0.4;
 	const float SPEED_LEVELUP_INCREASE = 0.05;
 	const float INITIAL_OFFSET = 0.0f; //first spawn after 100ms
+	int current_color_index = 0;
+	const std::string SPRITE_LABEL = "projectile2";
+	std::array<df::Color, 7> color_array = { df::GREEN, df::TURQUOISE,
+		df::Color(100, 100, 255, 255), df::YELLOW, df::ORANGE, df::RED, df::WHITE };
+
 	float projectile_speed = BASE_PROJECTILE_SPEED;
 
 	bool initial_offset = true; // is this the first spawn with initial offset?

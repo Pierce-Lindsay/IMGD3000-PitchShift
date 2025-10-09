@@ -335,7 +335,6 @@
     <Text Include="assets\sprites\invalid-heights.txt" />
     <Text Include="assets\sprites\chunk-spr.txt" />
     <Text Include="assets\sprites\frazzle-spr.txt" />
-    <Text Include="assets\sprites\projectile1.txt" />
     <Text Include="assets\sprites\projectile2.txt" />
     <Text Include="assets\sprites\turquoise-portal.txt" />
     <Text Include="assets\sprites\floor.txt" />

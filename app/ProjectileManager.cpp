@@ -7,11 +7,10 @@
 #include "../engine/graphics/Color.h"
 #include "../engine/game/GameManager.h"
 #include "EventCountdownFinished.h"
+#include "EventLevelUp.h"
 #include "Arrow.h"
 #include <iostream>
 #include <array>
-
-std::array<std::string, 1> sprite_labels = {"projectile2" }; //potential sprites for projectiles, more projectiles later
 
 
 ProjectileManager::ProjectileManager(SafeZone* safeZone) {
@@ -85,6 +84,12 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 		}
 		return 1;
 	}
+	else if (p_event->getType() == LEVEL_UP_EVENT)
+	{
+		current_color_index++;
+		if (current_color_index >= color_array.size())
+			current_color_index = 0;
+	}
 	return 0;
 }
 
@@ -94,8 +99,7 @@ void ProjectileManager::createProjectile(float xPos, float yPos) {
 
 	float speed = projectile_speed + ((rand() % 10)/10.f * max_delta); //add a little randomness
 	//int sprite_roll = rand() % sprite_labels.size();
-	std::string sprite_label = sprite_labels[0];	
-	Projectile* p = new Projectile(df::Vector(xPos, yPos), df::RED, speed, sprite_label);
+	Projectile* p = new Projectile(df::Vector(xPos, yPos), color_array[current_color_index], speed, SPRITE_LABEL);
 
 	if (p == NULL) {
 		LM.writeLog("ProjectileManager::createProjectile: Warning! Could not create projectile");
@@ -103,14 +107,13 @@ void ProjectileManager::createProjectile(float xPos, float yPos) {
 	}
 }
 
-
 void ProjectileManager::createProjectiles() {
 
 	if(safeZone == nullptr) {
 		LM.writeLog("ProjectileManager::createProjectiles: Warning! No safe zone provided, cannot spawn projectiles.");
 		return;
 	}
-
+	//find where center of safe zone is
 	float safeZoneCenter = float(safeZone->getSafeZone());
 	float leftStart = 5;
 	float rightEnd = float(DM.getHorizontalChars() - 1.5);
