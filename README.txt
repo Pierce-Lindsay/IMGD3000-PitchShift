@@ -23,7 +23,12 @@ Project configuration/dependencies:
 			sfml-network-d.lib
 			Winmm.lib
 			Ws2_32.lib
-		-Finally, the configuration expects to find debug DLLs at: PATH=%PATH%;..\SFML-3.0\bin
+			sfml-system.lib
+			sfml-window.lib
+			sfml-graphics.lib
+			sfml-audio.lib
+			sfml-network.lib
+		-Finally, the configuration expects to find DLLs at: PATH=%PATH%;..\SFML-3.0\bin
 
 	-The project should be able to be complied with ctrl-shift-B or f5 to compile and run.
 
@@ -104,6 +109,7 @@ Work Distribution
 	Many bug fixes
 	Floor management (a little bit)
 	Updated Projectile spawn patterns, Difficulty/Level up logic, Color Change
+	Level system
 	Score system
 	High Score saving/loading
 	Updated the game ending to be indefinite until the player loses
@@ -117,5 +123,6 @@ How to play:
 Expansions:
 	- Added a new difficulty: Practice
 	- Changed Easy mode health to 5 hits instead of 3
-	- Score system
-	- Game ending is now indefinite until the player loses
+	- Score system and level system.
+	- Game ending is now indefinite until the player loses and gets increasingly difficult as
+	  the level increases.

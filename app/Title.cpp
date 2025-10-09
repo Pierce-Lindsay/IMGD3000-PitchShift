@@ -16,6 +16,7 @@ Title::Title() {
 int Title::eventHandler(const df::Event* p_e) {
 	if(p_e->getType() == df::STEP_EVENT) {
 		const df::EventStep* p_step = dynamic_cast<const df::EventStep*>(p_e);
+		//change color of title suring animation
 		df::Sprite* p_sprite = getSprite();
 		df::Color colors[] = { df::RED, df::ORANGE, df::YELLOW, df::GREEN, df::BLUE, df::PURPLE, df::WHITE,
 		df::TURQUOISE, df::GRAY};

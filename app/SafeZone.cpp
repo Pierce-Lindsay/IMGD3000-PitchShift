@@ -82,8 +82,8 @@ void SafeZone::update()
 {
 	if (started && music->getMusic()->getStatus() != sf::SoundSource::Status::Playing)
 	{
-		//finished = true;
-		//std::cout << "finished safe zone" << std::endl;
+		finished = true;
+		std::cout << "finished safe zone" << std::endl;
 		return;
 	}
 	long long time_passed = clock.split() / 1000;

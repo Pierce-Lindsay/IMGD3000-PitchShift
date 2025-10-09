@@ -2,6 +2,9 @@
 #include "../engine/game/Object.h"
 #include "../engine/graphics/Color.h"
 
+/// <summary>
+/// Display the level the player is currently.
+/// </summary>
 class LevelDisplay : public df::Object 
 {
 public:

@@ -23,8 +23,7 @@ ScoreDisplay::ScoreDisplay(Difficulty d)
 			ostream << 0 << std::endl;
 			ostream.close();
 		}
-		
-		high_score = 0;
+		high_score = 0; //0 by default
 	}
 	else
 	{
@@ -46,6 +45,7 @@ int ScoreDisplay::eventHandler(const df::Event* p_e)
 	}
 	else if (p_e->getType() == GAME_END_EVENT) //update high score if applicable
 	{
+		//if new highscore when game ends, update
 		if (current_score > high_score) //only overwrite if score is better
 		{
 			std::ofstream ostream(SCORE_SAVE_FILE);
@@ -65,6 +65,7 @@ int ScoreDisplay::eventHandler(const df::Event* p_e)
 
 int ScoreDisplay::draw()
 {
+	//draw the high score and the current score
 	std::string high = "High Score: " + std::to_string(high_score);
 	std::string current = "Score: " + std::to_string(current_score);
 
