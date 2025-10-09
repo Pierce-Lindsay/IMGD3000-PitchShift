@@ -205,6 +205,7 @@
   <ItemGroup>
     <ClInclude Include="app\Arrow.h" />
     <ClInclude Include="app\Countdown.h" />
+    <ClInclude Include="app\Difficulty.h" />
     <ClInclude Include="app\EventChangeColor.h" />
     <ClInclude Include="app\EventCountdownFinished.h" />
     <ClInclude Include="app\EventGameEnd.h" />

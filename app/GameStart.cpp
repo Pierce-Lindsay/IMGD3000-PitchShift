@@ -15,6 +15,7 @@
 #include "SafeZone.h"
 #include "Countdown.h"
 #include "ScoreDisplay.h"
+#include "Difficulty.h"
 #include <vector>
 
 SafeZone* safeZone = nullptr; //needs to be handled by someone else
@@ -46,7 +47,7 @@ GameStart::GameStart() {
 	setAltitude(df::MAX_ALTITUDE);
 	setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() / 2)));
 	setSprite("game-start");
-	difficulty = "Easy";
+	difficulty = Difficulty::EASY;
 
 	p_music = RM.getMusic("startMusic");
 	if (p_music == NULL) {
@@ -67,27 +68,27 @@ int GameStart::eventHandler(const df::Event* p_e) {
 			break;
 		case df::Keyboard::Key::RIGHT:	// increase difficulty
 			if (p_keyboard_event->getKeyboardAction() == df::EventKeyboardAction::KEY_PRESSED) {
-				if (difficulty == "Easy") {
-					difficulty = "Hard";
+				if (difficulty == Difficulty::EASY) {
+					difficulty = Difficulty::HARD;
 				}
-				else if (difficulty == "Practice") {
-					difficulty = "Easy";
+				else if (difficulty == Difficulty::PRACTICE) {
+					difficulty = Difficulty::EASY;
 				}
-				else if (difficulty == "Hard") {
-					difficulty = "Hard";
+				else if (difficulty == Difficulty::HARD) {
+					difficulty = Difficulty::HARD;
 				}
 			}
 			break;
 		case df::Keyboard::Key::LEFT:		// decrease difficulty
 			if (p_keyboard_event->getKeyboardAction() == df::EventKeyboardAction::KEY_PRESSED) {
-				if (difficulty == "Easy") {
-					difficulty = "Practice";
+				if (difficulty == Difficulty::EASY) {
+					difficulty = Difficulty::PRACTICE;
 				}
-				else if (difficulty == "Practice") {
-					difficulty = "Practice";
+				else if (difficulty == Difficulty::PRACTICE) {
+					difficulty = Difficulty::PRACTICE;
 				}
-				else if (difficulty == "Hard") {
-					difficulty = "Easy";
+				else if (difficulty == Difficulty::HARD) {
+					difficulty = Difficulty::EASY;
 				}
 			}
 			break;
@@ -101,16 +102,19 @@ int GameStart::eventHandler(const df::Event* p_e) {
 		df::Vector pos = df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 2.0f));
 		DM.drawString(df::Vector(pos.x, pos.y - 1.0f), "LEFT and RIGHT Arrow keys to change difficulty", df::Justification::CENTER, df::YELLOW);
 		df::Color color = df::YELLOW;
-		if (difficulty == "Practice") {
+		std::string diff =  "Practice (0x points)";
+		if (difficulty == Difficulty::PRACTICE) {
 			color = df::TURQUOISE;
 		}
-		else if (difficulty == "Easy") {
+		else if (difficulty == Difficulty::EASY) {
 			color = df::GREEN;
+			diff = "Easy (1x points)";
 		}
-		else if (difficulty == "Hard") {
+		else if (difficulty == Difficulty::HARD) {
 			color = df::RED;
+			diff = "Hard (3x points)";
 		}
-		DM.drawString(pos, "Difficulty: " + difficulty, df::Justification::CENTER, color);
+		DM.drawString(pos, "Difficulty: " + diff, df::Justification::CENTER, color);
 	}
 	return 0;
 }
@@ -135,7 +139,7 @@ void GameStart::start() {
 	p2->setSprite("orange-portal");
 
 	new LevelDisplay;
-	new ScoreDisplay;
+	new ScoreDisplay(difficulty);
 
 	for (int i = 0; i < 5; i++) {
 		Floor* p_floor = new Floor;
@@ -147,12 +151,12 @@ void GameStart::start() {
 	new ProjectileManager(safeZone);
 
 	Player* p_player = new Player;
-	if (difficulty == "Practice") {
+	if (difficulty == Difficulty::PRACTICE) {
 		p_player->setHealth(100);
-	} else if (difficulty == "Easy") {
+	} else if (difficulty == Difficulty::EASY) {
 		p_player->setHealth(5);
 	}
-	else if (difficulty == "Hard") {
+	else if (difficulty == Difficulty::HARD) {
 		p_player->setHealth(1);
 	}
 

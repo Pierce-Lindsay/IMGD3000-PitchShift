@@ -6,9 +6,11 @@
 #include <iostream>
 #include <fstream>
 
-ScoreDisplay::ScoreDisplay()
+ScoreDisplay::ScoreDisplay(Difficulty d)
 {
 	setType("score-display");
+	score_multi = static_cast<long long>(d);
+
 	//first check if score file exists
 	std::ifstream read(SCORE_SAVE_FILE);
 	if (!read.is_open()) //not open so create file and write 0
@@ -39,7 +41,7 @@ int ScoreDisplay::eventHandler(const df::Event* p_e)
 	if (p_e->getType() == LEVEL_UP_EVENT)
 	{
 		const EventLevelUp* e = dynamic_cast<const EventLevelUp*>(p_e);
-		current_score += e->getLevel(); //add level to current score
+		current_score += e->getLevel() * score_multi; //add level to current score
 	}
 	else if (p_e->getType() == GAME_END_EVENT) //update high score if applicable
 	{

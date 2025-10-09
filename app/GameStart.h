@@ -1,6 +1,7 @@
 #pragma once
 #include "../engine/audio/Music.h"
 #include "../engine/game/Object.h"
+#include "Difficulty.h"
 
 
 /// <summary>
@@ -9,7 +10,7 @@
 class GameStart : public df::Object {
 	private:
 		df::Music* p_music; //pointer to start music
-		std::string difficulty; // game difficulty
+		Difficulty difficulty; // game difficulty
 
 		// Start the game
 		void start();
