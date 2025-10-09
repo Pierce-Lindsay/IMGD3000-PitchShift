@@ -13,6 +13,7 @@
 #include "Floor.h"
 #include "SafeZone.h"
 #include "Countdown.h"
+#include "ScoreDisplay.h"
 #include <vector>
 
 SafeZone* safeZone = nullptr; //needs to be handled by someone else
@@ -90,6 +91,7 @@ void GameStart::start() {
 	p2->setSprite("orange-portal");
 
 	new LevelDisplay;
+	new ScoreDisplay;
 
 	for (int i = 0; i < 5; i++) {
 		Floor* p_floor = new Floor;

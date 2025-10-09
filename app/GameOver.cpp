@@ -5,6 +5,7 @@
 #include "../engine/game/ObjectList.h"
 #include "../engine/ResourceManager.h"
 #include "../engine/game/EventStep.h"
+#include "EventGameEnd.h"
 #include "ProjectileManager.h"
 #include "SafeZone.h"
 
@@ -16,6 +17,8 @@ GameOver::GameOver() {
 	setAltitude(df::MAX_ALTITUDE);
 	setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() / 2)));
 	setSprite("game-over");
+	EventGameEnd e;
+	WM.onEvent(&e); //notify objects game is ending
 	time_to_live = 120; // 120 frames = 4 seconds at 30 fps
 	p_sound = RM.getSound("gameOver");
 	if (p_sound == NULL) {

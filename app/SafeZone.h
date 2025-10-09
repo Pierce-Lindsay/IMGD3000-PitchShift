@@ -9,9 +9,8 @@
 class SafeZone
 {
 private:
-	const float DEFAULT_SAFE_ZONE_WIDTH = 20.0f;
+	const float DEFAULT_SAFE_ZONE_WIDTH = 30.0f;
 	const float DEFAULT_MIN_SAFE_ZONE_WIDTH = 4.0f;
-	int size = 0; // 1/2 second positions
 	std::vector<float>& safePositions;
 	bool finished = false;
 	bool started = false;

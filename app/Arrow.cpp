@@ -12,12 +12,12 @@ Arrow::Arrow(bool right, df::Vector pos)
 	if (right)
 	{
 		setSprite("right-arrow");
-		setVelocity(df::Vector(2.5, 0));
+		setVelocity(df::Vector(3, 0));
 	}
 	else
 	{
 		setSprite("left-arrow");
-		setVelocity(df::Vector(-2.5, 0));
+		setVelocity(df::Vector(-3, 0));
 	}
 }
 

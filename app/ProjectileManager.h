@@ -41,10 +41,18 @@ private:
 	int draw() override; //not drawable
 	int eventHandler(const df::Event* p_event) override;
 	bool spawning = false;
-	const float SPAWN_INTERVAL = 958.33f; //miliseconds //aligned with beat
+	const float SPAWN_INTERVAL = 1000.f; //miliseconds //aligned with beat
+	const float SPAWN_SPACING = 4.75f;
+	const float Y_BASE_SPAWN_POS = -1;
+	const float Y_SPAWN_DELTA = 1.f; //we want projectiles next to teh edges(near portal) to spawn higher
+	const float Y_MAX_SPEED_DELTA = 0.05; //this is a fraction of the current speed
+	const float BASE_PROJECTILE_SPEED = 0.4;
+	const float SPEED_LEVELUP_INCREASE = 0.05;
+	const float INITIAL_OFFSET = 0.0f; //first spawn after 100ms
+	float projectile_speed = BASE_PROJECTILE_SPEED;
+
 	bool initial_offset = true; // is this the first spawn with initial offset?
 	bool spawned_arrows = false; //only once per projectile spawn
-	const float INITIAL_OFFSET = 0.0f; //first spawn after 100ms
 	float lastSpawnTime = 0; //last time we spawned.
 	SafeZone* safeZone = nullptr;
 

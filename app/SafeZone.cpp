@@ -7,7 +7,6 @@
 
 SafeZone::SafeZone(std::vector<float>& safePositions, float positionSpacingSeconds, df::Music* music) : safePositions(safePositions), positionSpacingSeconds(positionSpacingSeconds), music(music)
 {
-	size = safePositions.size();
 }
 
 float SafeZone::getSafeZone()
@@ -23,11 +22,14 @@ float SafeZone::getSafeZone()
 	int lower_index = (int)floor((current_position_sec / positionSpacingSeconds));
 	int upper_index = (int)ceil((current_position_sec / positionSpacingSeconds));
 
-	if(upper_index >= size) {
-		finished = true;
-		LM.GetInstance().writeLog("SafeZone::getSafeZone: Safe zone finished, returning -1.");
-		return -1; //no safe zone
-	}
+	std::cout << upper_index << ", " << lower_index << '\n';
+
+	//clamp if neccessary
+	if (upper_index >= safePositions.size())
+		upper_index = safePositions.size()-1;
+
+	if (lower_index >= safePositions.size() - 1)
+		lower_index = safePositions.size() - 2; 
 
 	float lower_val = safePositions[lower_index];
 	float upper_val = safePositions[upper_index];
@@ -42,11 +44,12 @@ int SafeZone::getSafeZoneDeltaDirection()
 	int lower_index = (int)floor((current_position_sec / positionSpacingSeconds));
 	int upper_index = (int)ceil((current_position_sec / positionSpacingSeconds));
 
-	if (upper_index >= size) {
-		finished = true;
-		LM.GetInstance().writeLog("SafeZone::getSafeZone: Safe zone finished, returning -1.");
-		return 0; //no safe zone
-	}
+	//clamp if neccessary
+	if (upper_index >= safePositions.size())
+		upper_index = safePositions.size() - 1;
+
+	if (lower_index >= safePositions.size() - 1)
+		lower_index = safePositions.size() - 2;
 
 	if (safePositions[upper_index] - safePositions[lower_index] < 0)
 	{
@@ -62,7 +65,7 @@ void SafeZone::start()
 		LM.writeLog("SafeZone::start: Warning! No music provided, cannot start safe zone.");
 		return;
 	}
-	music->play();
+	music->play(true); //keeping looping
 	started = true;
 	clock.delta(); //reset clock
 }
@@ -81,15 +84,16 @@ void SafeZone::update()
 {
 	if (started && music->getMusic()->getStatus() != sf::SoundSource::Status::Playing)
 	{
-		finished = true;
-		std::cout << "finished safe zone" << std::endl;
+		//finished = true;
+		//std::cout << "finished safe zone" << std::endl;
 		return;
 	}
 	long long time_passed = clock.split() / 1000;
-	std::cout << "time passed: " << time_passed << " ms, width: " << width << std::endl;
-	if (time_passed >= LEVEL_UP_TIME && width > DEFAULT_MIN_SAFE_ZONE_WIDTH)
+	//std::cout << "time passed: " << time_passed << " ms, width: " << width << std::endl;
+	if (time_passed >= LEVEL_UP_TIME)
 	{
-		width -= LEVEL_UP_DECREASE; //decrease width every level up time
+		if(width > DEFAULT_MIN_SAFE_ZONE_WIDTH)
+			width -= LEVEL_UP_DECREASE; //decrease width every level if greater than min
 		clock.delta(); //reset clock
 		level++;
 		EventLevelUp e(level);

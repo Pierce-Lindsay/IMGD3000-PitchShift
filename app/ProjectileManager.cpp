@@ -8,6 +8,7 @@
 #include "../engine/game/GameManager.h"
 #include "EventCountdownFinished.h"
 #include "Arrow.h"
+#include <iostream>
 #include <array>
 
 std::array<std::string, 1> sprite_labels = {"projectile2" }; //potential sprites for projectiles, more projectiles later
@@ -48,7 +49,7 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 		}
 		return 1;
 	}
-	else if (p_event->getType() == df::STEP_EVENT) 
+	else if (p_event->getType() == df::STEP_EVENT)
 	{
 		const df::EventStep* p_step = dynamic_cast<const df::EventStep*>(p_event);
 
@@ -57,26 +58,20 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 		if (safeZone->hasStarted() && spawning)
 		{
 			curTime = safeZone->getMusicTime();
-			if ((initial_offset && curTime  - lastSpawnTime >= INITIAL_OFFSET) || 
+			if (curTime < lastSpawnTime) //if we loop, reset
+				lastSpawnTime = 0;
+
+			if ((initial_offset && curTime - lastSpawnTime >= INITIAL_OFFSET) ||
 				(curTime - lastSpawnTime >= SPAWN_INTERVAL))
 			{
 				if (initial_offset) initial_offset = false; //only apply initial offset once
 
 				safeZone->update();
-				if (safeZone->isFinished())
-				{
-					spawning = false;
-					LM.writeLog("ProjectileManager::eventHandler: Safe zone finished, stopping spawning.");
-					return 1;
-				}
-				else
-				{
-					spawned_arrows = false;
-					createProjectiles(); //only create if not finished
-					lastSpawnTime = curTime;
-				}
+				spawned_arrows = false;
+				createProjectiles(); //only create if not finished
+				lastSpawnTime = curTime;
 			}
-			else if (curTime - lastSpawnTime >= SPAWN_INTERVAL / 2.0f && !spawned_arrows) //get transition directionand spawn arrow
+			else if (p_step->getStepCount() != 0 && p_step->getStepCount() % 5 == 0) //get transition directionand spawn arrow
 			{
 				int dir = safeZone->getSafeZoneDeltaDirection();
 				if (dir == 0)
@@ -84,7 +79,7 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 
 				if (dir != 1)
 					dir = 0;
-				new Arrow(dir, df::Vector(DM.getHorizontalChars() / 2, DM.getVerticalChars() / 2));
+				new Arrow(dir, df::Vector(DM.getHorizontalChars() / 2, DM.getVerticalChars() - 1));
 				spawned_arrows = true;
 			}
 		}
@@ -95,7 +90,9 @@ int ProjectileManager::eventHandler(const df::Event* p_event) {
 
 void ProjectileManager::createProjectile(float xPos, float yPos) {
 	//create a projectile at the given x position
-	float speed = 0.55 + (rand() % 10 + 1) / 80.0f;
+	float max_delta = projectile_speed * Y_MAX_SPEED_DELTA;
+
+	float speed = projectile_speed + ((rand() % 10)/10.f * max_delta); //add a little randomness
 	//int sprite_roll = rand() % sprite_labels.size();
 	std::string sprite_label = sprite_labels[0];	
 	Projectile* p = new Projectile(df::Vector(xPos, yPos), df::RED, speed, sprite_label);
@@ -116,7 +113,7 @@ void ProjectileManager::createProjectiles() {
 
 	float safeZoneCenter = float(safeZone->getSafeZone());
 	float leftStart = 5;
-	float rightEnd = float(DM.getHorizontalChars() - 3);
+	float rightEnd = float(DM.getHorizontalChars() - 1.5);
 
 	if(safeZoneCenter < leftStart || safeZoneCenter > rightEnd) {
 		LM.writeLog("ProjectileManager::createProjectiles: Warning! Safe zone center out of bounds, cannot spawn projectiles.");
@@ -131,22 +128,25 @@ void ProjectileManager::createProjectiles() {
 
 	LM.writeLog("ProjectileManager::createProjectiles::Safe zone pos: %f", safeZoneCenter);
 
-	int leftSpawnCount = (leftEnd - leftStart) / 5; //every other position
-	int rightSpawnCount = (rightEnd - rightStart) /5; //every other position
+	int leftSpawnCount = (leftEnd - leftStart) / SPAWN_SPACING; //every other 5 positions
+	int rightSpawnCount = (rightEnd - rightStart) /SPAWN_SPACING; //every other position
 
 	//ypos shift disabled for now //spawn in availabile spaces with fixed shift
-	float yPos = 0;
+	float yPos = Y_BASE_SPAWN_POS - Y_SPAWN_DELTA * 2; //first 2 projectiels spawn higher
 	for (int i = 0; i < leftSpawnCount; i++) {
-		float xPos = float(leftStart + i * 5 + 1); //+1 to avoid spawning at 0
+		float xPos = float(leftStart + i * SPAWN_SPACING + 1); //+1 to avoid spawning at 0
 		createProjectile(xPos,yPos);
-		yPos -= 0.4f;
+		yPos += Y_SPAWN_DELTA;
+		if (yPos > Y_BASE_SPAWN_POS) //don't let go above base spawnpos
+			yPos = Y_BASE_SPAWN_POS;
 
 	}
-	yPos = -rightSpawnCount * 0.4f;
+	yPos = Y_BASE_SPAWN_POS;
 	for (int i = 0; i < rightSpawnCount; i++) {
-		float xPos = float(rightStart + i * 5 + 1); //+1 to avoid spawning at 0
+		float xPos = float(rightStart + i * SPAWN_SPACING);
+		if (i + 2 == rightSpawnCount)
+			yPos -= Y_SPAWN_DELTA;
 		createProjectile(xPos, yPos);
-		yPos += 0.4f;
 	}
 }
 
