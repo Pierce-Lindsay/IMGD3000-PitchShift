@@ -164,6 +164,7 @@
     <ClCompile Include="app\GameStart.cpp" />
     <ClCompile Include="app\LevelDisplay.cpp" />
     <ClCompile Include="app\Player.cpp" />
+    <ClCompile Include="app\PlayerHealthDisplay.cpp" />
     <ClCompile Include="app\Portal.cpp" />
     <ClCompile Include="app\Projectile.cpp" />
     <ClCompile Include="app\ProjectileManager.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="app\GameStart.h" />
     <ClInclude Include="app\LevelDisplay.h" />
     <ClInclude Include="app\Player.h" />
+    <ClInclude Include="app\PlayerHealthDisplay.h" />
     <ClInclude Include="app\Portal.h" />
     <ClInclude Include="app\Projectile.h" />
     <ClInclude Include="app\ProjectileManager.h" />

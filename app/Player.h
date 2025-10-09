@@ -3,6 +3,7 @@
 #include "../engine/input/EventKeyboard.h"
 #include "../engine/game/EventCollision.h"
 #include "EventTeleport.h"
+#include "PlayerHealthDisplay.h"
 
 /// <summary>
 /// Class for the player object, handles movement, health, score, and collisions of player.
@@ -11,7 +12,6 @@ class Player : public df::Object {
 	private:
 		const float TELEPORT_DELTA = 7;
 		int health; // player health
-		int score; // player score
 		float speed; // player speed
 		int dx; // horizontal movement direction (-1, 0, 1)
 		int invincibility_timer; // frames of invincibility left
@@ -19,6 +19,7 @@ class Player : public df::Object {
 		bool isHit; // flag to indicate if player was hit
 		bool should_teleport; // flag to indicate if player should teleport
 		df::Vector teleport_position = df::Vector(0, 0); // position to teleport to
+		PlayerHealthDisplay* health_display = NULL; //display of health 
 
 		// Handle user input for movement
 		void handleInput(const df::EventKeyboard* p_keyboard_event);
@@ -45,10 +46,6 @@ class Player : public df::Object {
 		void setHealth(int new_health);
 
 		int getHealth() const;
-
-		void setScore(int new_score);
-
-		int getScore() const;
 
 		void kill(); //kill the player, end game
 };

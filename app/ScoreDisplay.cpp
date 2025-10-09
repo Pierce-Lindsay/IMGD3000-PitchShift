@@ -28,7 +28,6 @@ ScoreDisplay::ScoreDisplay(Difficulty d)
 	{
 		std::string high = "";
 		read >> high;
-		std::cout << "read high score: " << high << '\n';
 		high_score = std::stoll(high);
 		read.close();
 	}

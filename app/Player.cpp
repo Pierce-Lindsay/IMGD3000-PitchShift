@@ -24,8 +24,8 @@ Player::Player() {
 		return;
 	}
 	setAltitude(3);
-	health = 3;
-	score = 0;
+	health_display = new PlayerHealthDisplay;
+	setHealth(1);
 	speed = 2.f;
 	dx = 0;
 	invincibility_timer = 0;
@@ -78,18 +78,11 @@ int Player::eventHandler(const df::Event* p_e) {
 
 void Player::setHealth(int new_health) {
 	health = new_health;
+	health_display->setHealth(health);
 }
 
 int Player::getHealth() const {
 	return health;
-}
-
-void Player::setScore(int new_score) {
-	score = new_score;
-}
-
-int Player::getScore() const {
-	return score;
 }
 
 void Player::handleInput(const df::EventKeyboard* p_keyboard_event) {
@@ -113,19 +106,11 @@ void Player::handleInput(const df::EventKeyboard* p_keyboard_event) {
 			LM.writeLog("Player::handleInput: Player quit, game over");
 			WM.markForDelete(this);
 			break;
-		case df::Keyboard::Key::C:
-			if (p_keyboard_event->getKeyboardAction() == df::EventKeyboardAction::KEY_PRESSED) {
-				setPosition(df::Vector((float)(DM.getHorizontalChars() / 2), (float)(DM.getVerticalChars() - 5)));
-			}
-			break;
 		case df::Keyboard::Key::H:
 			if (p_keyboard_event->getKeyboardAction() == df::EventKeyboardAction::KEY_PRESSED) {
 				LM.writeLog("Player::handleInput: Player health increased");
-				health += 1;
+				setHealth(health + 1);
 			}
-			break;
-		case df::Keyboard::Key::X:
-			setPosition(df::Vector((float)(DM.getHorizontalChars() - 7), getPosition().y));
 			break;
 		default:
 			break;
@@ -158,8 +143,6 @@ void Player::step() {
 	}
 	move();
 
-	DM.drawString(df::Vector(DM.getHorizontalChars()-1, 2.0f), "Health: " + std::to_string(health), df::Justification::LEFT, df::GREEN);
-
 	df::Sprite* p_sprite = getSprite();
 
 	if (isHit) {
@@ -184,7 +167,7 @@ void Player::hit(const df::EventCollision* p_collision_event) {
 		LM.writeLog("Player::eventHandler: Player hit by projectile");
 		if (!isHit) {
 			LM.writeLog("Player::eventHandler: Player health decreased");
-			health -= 1;
+			setHealth(health - 1);
 			isHit = true;
 			invincibility_timer = invincibility_duration;
 			RM.getSound("explode")->play();

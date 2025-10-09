@@ -165,6 +165,9 @@
     <ClCompile Include="app\EventGameEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="app\PlayerHealthDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\Manager.h">
@@ -318,6 +321,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="app\Difficulty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\PlayerHealthDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
